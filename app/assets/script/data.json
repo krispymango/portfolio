@@ -1,4 +1,8 @@
 {
+    "name":{
+        "first_name": "Abdul - Razak",
+        "last_name": "Mahama"
+    },
     "settings":{
         "language":{
             "english": false,
@@ -21,6 +25,10 @@
 
         }
     },
+    "language":[
+        "English",
+        "Arabic"
+    ],
     "professional_experience":{
         "english":{
 
@@ -51,10 +59,30 @@
     },
     "contact":{
         "english":{
-            "address":"",
-            "email_address":"",
-            "linked_in":"",
-            "instagram":["",""]
+            "address": "A899, Gbawe-Mallam, Accra, Ghana",
+            "email_address": "razakmahama.rm@gmail.com",
+            "linked_in": [
+                {
+                    "title": "Abdul - Razak Mahama",
+                    "link": ""
+                }
+            ],
+            "instagram":[
+                {
+                    "title": "kriolay",
+                    "link": "https://www.instagram.com/kriolay?igsh=d2xobTV4bWZrYTRm&utm_source=qr"
+                },
+                {
+                    "title": "abenchi media",
+                    "link": "https://www.instagram.com/abenchi_media?igsh=MXJsdWFoYjR6eGx6Yw%3D%3D&utm_source=qr"
+                }
+            ],
+            "tiktok":[
+                {
+                    "title": "abenchi media",
+                    "link": ""
+                }
+            ]
         },
         "arabic":{
             "address":"",
