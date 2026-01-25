@@ -1,0 +1,74 @@
+{
+    "settings":{
+        "language":{
+            "english": false,
+            "arabic": false
+        },
+        "volume":{
+            "bg":"",
+            "sfx":""
+        },
+        "display_mode":{
+            "dark_mode": false,
+            "light_mode": true
+        }
+    },
+    "education":{
+        "english":{
+
+        },
+        "arabic":{
+
+        }
+    },
+    "professional_experience":{
+        "english":{
+
+        },
+        "arabic":{
+            
+        }
+    },
+    "core_competence":{
+        "english":{
+
+        },
+        "arabic":{
+
+        }
+    },
+    "projects":{
+        "english":[
+            {},
+            {},
+            {}
+        ],
+        "arabic":[
+            {},
+            {},
+            {}
+        ]
+    },
+    "contact":{
+        "english":{
+            "address":"",
+            "email_address":"",
+            "linked_in":"",
+            "instagram":["",""]
+        },
+        "arabic":{
+            "address":"",
+            "email_address":"",
+            "linked_in":"",
+            "instagram":["",""]
+        }
+    },
+    "profile_summary":{
+        "english":{
+
+        },
+        "arabic":{
+
+        }
+    }
+}
