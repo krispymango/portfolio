@@ -1,5 +1,5 @@
 {
-    "name":{
+    "profile":{
         "first_name": "Abdul - Razak",
         "last_name": "Mahama"
     },
@@ -9,8 +9,8 @@
             "arabic": false
         },
         "volume":{
-            "bg":"",
-            "sfx":""
+            "bg":4,
+            "sfx":3
         },
         "display_mode":{
             "dark_mode": false,
@@ -19,10 +19,34 @@
     },
     "education":{
         "english":{
+            "primary_education": {
+                "institution": "Jack and Jill School",
+                "address": "Roman Ridge, Accra, Ghana"
+            },
+            "secondary_education": {
+                "institution": "Akosombo International School ",
+                "program": "General Science",
+                "address": "Akosombo, Ghana"
+            },
+            "tertiary_education": {
+                "institution": "University of Ghana",
+                "program": "Bachelor of Science in Information and Technology",
+                "address": "Accra, Ghana"
+            },
+            "certificate_courses": {
 
+            }
         },
         "arabic":{
+            "primary_education": {
 
+            },
+            "secondary_education": {
+
+            },
+            "tertiary_education": {
+                
+            }
         }
     },
     "language":[
@@ -30,31 +54,105 @@
         "Arabic"
     ],
     "professional_experience":{
-        "english":{
-
-        },
+        "english":[
+            {
+                "institution": "Fiverr",
+                "address": "Accra, Ghana",
+                "from_date": "Jan. 2021",
+                "to_date": "Present",
+                "position": "Freelance Web Developer & Graphic Designer",
+                "link": "https://www.fiverr.com/abenchimedia?public_mode=true",
+                "details": [
+                    "",
+                    ""
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2021",
+                "to_date": "Oct. 2022",
+                "position": "Junior Full–Stack Web Developer (Intern)",
+                "link": "",
+                "details": [
+                    "",
+                    ""
+                ]
+            },
+            {
+                "institution": "Upwork",
+                "address": "Accra, Ghana",
+                "from_date": "Apr. 2022",
+                "to_date": "Present",
+                "position": "Freelance Web Developer",
+                "link": "https://www.upwork.com/freelancers/~01391822cb8ae0bcd4",
+                "details": [
+                    "",
+                    ""
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2022",
+                "to_date": "Aug. 2023",
+                "position": "Junior Software Developer (National Service)",
+                "link": "",
+                "details": [
+                    "",
+                    ""
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2023",
+                "to_date": "Present",
+                "position": "Software Developer (Full-Time)",
+                "link": "",
+                "details": [
+                    "",
+                    ""
+                ]
+            }
+        ],
         "arabic":{
             
         }
     },
     "core_competence":{
-        "english":{
-
-        },
+        "english":[
+            "ReactJS",
+            "NodeJS",
+            "Core PHP",
+            "React Native",
+            "API Integration",
+            "Database Optimization",
+            "SQL Management (MySql, OracleSql)",
+            "Cross Platform Apps",
+            "Version Control",
+            "Linux Systems",
+            "Penetration Testing"
+        ],
         "arabic":{
 
         }
     },
     "projects":{
         "english":[
-            {},
-            {},
-            {}
+            {
+                "title": "Pen Clashers | Classic",
+                "link": "https://play.google.com/store/apps/details?id=com.penc&hl=en",
+                "description": "Created a mobile game app that makes use of apis, optimizes resources and reusing code by creating functions and classes for a smoother and faster gameplay experience."
+            },
+            {
+                "title": "Vehicle Stories",
+                "link": "",
+                "description": "Developed a user-friendly online vehicle catalog for B2C interactions with search filters and a chat system."
+            }
         ],
         "arabic":[
-            {},
-            {},
-            {}
+            
         ]
     },
     "contact":{
@@ -64,7 +162,7 @@
             "linked_in": [
                 {
                     "title": "Abdul - Razak Mahama",
-                    "link": ""
+                    "link": "https://www.linkedin.com/in/abdul-razak-mahama-52703721b"
                 }
             ],
             "instagram":[
@@ -85,15 +183,13 @@
             ]
         },
         "arabic":{
-            "address":"",
-            "email_address":"",
-            "linked_in":"",
-            "instagram":["",""]
+
         }
     },
     "profile_summary":{
         "english":{
-
+            "fullname": "Abdul - Razak Mahama",
+            "description": "Versatile and results-driven Full-Stack Developer with proven expertise in designing, developing, and deploying scalable web and mobile applications. Adept in both front-end and back-end technologies with strong command over ReactJS, React Native, PHP, NodeJS, Oracle Sql and MySQL. Demonstrated success in creating client-centric solutions across freelance and corporate environments. Known for optimizing performance through database tuning and API integration. Experience spans national service, internships, and independent contracts, highlighting adaptability and technical agility. Highly committed to clean code practices, UI/UX excellence, and agile collaboration. Ready to drive innovation in dynamic development teams."
         },
         "arabic":{
 
