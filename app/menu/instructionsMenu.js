@@ -3,7 +3,7 @@ class instructionsMenu extends Phaser.Scene {
         super('instructionsMenu');
     }
 
-    create(){
+    create(data){
         
     }
 }

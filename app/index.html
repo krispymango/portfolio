@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Engine -->
+    <script src="./assets/engine/phaser.js"></script>
+    <script src="./assets/engine/easystar.js"></script>
+    <!-- Engine -->
+
+    <!-- Managers -->
+    <script src="./assets/managers/characterUIManager.js"></script>
+    <script src="./assets/managers/dayCycleManager.js"></script>
+    <script src="./assets/managers/mapManager.js"></script>
+    <!-- Managers -->
 
     <!-- Menus -->
     <script src="./menu/messengerMenu.js"></script>
     <script src="./menu/languageMenu.js"></script>
+    <script src="./menu/instructionsMenu.js"></script>
+    <script src="./menu/reusableMenu.js"></script>
     <!-- Menus -->
 
     <!-- Scenes -->
@@ -14,9 +27,6 @@
     <script src="./scenes/loadScene.js"></script>
     <!-- Scenes -->
 
-    <!-- Engine -->
-    <script src="./assets/game_engine/phaser.js"></script>
-    <!-- Engine -->
 
     <script src="./scenes/game.js"></script>
 
@@ -36,6 +46,15 @@
             width: 100%;
             height: 100%;
             display: none;
+        }
+
+        canvas{
+            position: absolute;
+            top: 50%;
+            left: 0px;
+            right: 0px;
+            transform: translateY(-50%);
+            margin: 0px auto;
         }
     </style>
 </head>

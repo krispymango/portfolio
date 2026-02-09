@@ -27,13 +27,15 @@ class loadScene extends Phaser.Scene{
             this.progressBar.y = config.height / 2 + 30;
         });
 
-        this.load.on('complete', () => {
+        // this.load.on('complete', () => {
             
-        });
+        // });
 
         // Load dialogue data
-        this.load.json('story', './assets/script/data.json');
+        this.load.json('config_data', './assets/script/data.json');
 
+        // Load. tilemap
+        this.load.tilemapTiledJSON("map", "./assets/maps/map.json");
 
         //Tilesets
         this.load.image("barn", "./assets/img/tiles/barn.png");
@@ -70,7 +72,45 @@ class loadScene extends Phaser.Scene{
         
         this.load.image("allowed_paths", "./assets/img/tiles/allowed_paths.png");
 
+        //Panels
+        this.load.image('navigation_menu', './assets/img/ui/transparent_border/panel-transparent-border-010.png');
 
+        //Day Cycle
+        this.load.image('day1', './assets/img/ui/day_night/day/1.png');
+        this.load.image('day2', './assets/img/ui/day_night/day/2.png');
+        this.load.image('day3', './assets/img/ui/day_night/day/3.png');
+        this.load.image('day4', './assets/img/ui/day_night/day/4.png');
+        this.load.image('day5', './assets/img/ui/day_night/day/5.png');
+        this.load.image('day6', './assets/img/ui/day_night/day/6.png');
+        this.load.image('day7', './assets/img/ui/day_night/day/7.png');
+        this.load.image('day8', './assets/img/ui/day_night/day/8.png');
+        this.load.image('day9', './assets/img/ui/day_night/day/9.png');
+        this.load.image('day10', './assets/img/ui/day_night/day/10.png');
+
+
+        //Day Cycle
+        this.load.image('night1', './assets/img/ui/day_night/night/1.png');
+        this.load.image('night2', './assets/img/ui/day_night/night/2.png');
+        this.load.image('night3', './assets/img/ui/day_night/night/3.png');
+        this.load.image('night4', './assets/img/ui/day_night/night/4.png');
+        this.load.image('night5', './assets/img/ui/day_night/night/5.png');
+        this.load.image('night6', './assets/img/ui/day_night/night/6.png');
+        this.load.image('night7', './assets/img/ui/day_night/night/7.png');
+        this.load.image('night8', './assets/img/ui/day_night/night/8.png');
+        this.load.image('night9', './assets/img/ui/day_night/night/9.png');
+        this.load.image('night10', './assets/img/ui/day_night/night/10.png');
+
+        //Socials
+        this.load.image('instagram', './assets/img/ui/socials/Emojis_Social_48x48_2.png');
+        this.load.image('itch', './assets/img/ui/socials/Emojis_Social_48x48_5.png');
+        this.load.image('gmail', './assets/img/ui/socials/Emojis_Social_48x48_18.png');
+        this.load.image('playstore', './assets/img/ui/socials/Emojis_Social_48x48_23.png');
+        this.load.image('github', './assets/img/ui/socials/Emojis_Social_48x48_35.png');
+        this.load.image('linkedIn', './assets/img/ui/socials/Emojis_Social_48x48_37.png');
+        this.load.image('tiktok', './assets/img/ui/socials/Emojis_Social_48x48_71.png');
+        this.load.image('newgrounds', '.app/assets/img/ui/socials/Emojis_Social_48x48_76.png');
+         
+         
     }
 
     create(){

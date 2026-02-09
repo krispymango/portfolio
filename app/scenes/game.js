@@ -1,6 +1,7 @@
 var config = {
     width: window.innerWidth,
     height: window.innerHeight,
+    fps: { target: 60, forceSetTimeOut: true },
     backgroundColor: '#292524',
     scene: [
         loadScene, 
