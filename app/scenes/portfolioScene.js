@@ -34,6 +34,9 @@ class portfolioScene extends Phaser.Scene{
             loader.remove();
         });
 
+
+        this.scene.launch('instructionsMenu');
+
             
         let bg = this.sound.get('spring_break');
 

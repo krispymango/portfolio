@@ -7,8 +7,6 @@ class reusableMenu extends Phaser.Scene {
         //Cursor Default Icon
         this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
 
-    
-
         var bgSfxTap = this.sound.add('click_sound', {
             loop: false,
             volume: 1
@@ -61,20 +59,20 @@ class reusableMenu extends Phaser.Scene {
         .setDepth(999);
 
 
-        let modalWidth = 800;
+        let modalWidth = 900;
         let modalHeight = 600;
         
         if (config.width >= 350 && config.width <= 500) 
         {
-            modalWidth = 300;
-            modalHeight = 300;
+            modalWidth = 350;
+            modalHeight = 600;
         }
 
         if (data.data.imp !== 'education' && data.data.imp !== 'professional_experience') {
             if (config.width >= 350 && config.width <= 500) 
             {
-                modalWidth = 300;   // smaller width
-                modalHeight = 300;  // smaller height
+                modalWidth = 350;   // smaller width
+                modalHeight = 600;  // smaller height
             }
             else
             {
@@ -121,7 +119,7 @@ class reusableMenu extends Phaser.Scene {
 // -----------------------------
 // SCROLLABLE DESCRIPTION
 // -----------------------------
-const descWidth = modalWidth - 160;  // leave padding
+const descWidth = modalWidth - (config.width >= 350 && config.width <= 500) ? 260 : 160;  // leave padding
 const descHeight = modalHeight - 160;
 const centerX = config.width / 2;
 const centerY = config.height / 2;
@@ -152,7 +150,8 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 fontFamily:'fibberish',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :  '26px',
                 fill:'#fff',
-                fontStyle:'bold'
+                fontStyle:'bold',
+                wordWrap:{ width: itemWidth - 10 }
             }).setOrigin(0,0).setStroke('#44403B', 5);
             texts.push(t);
             currentTextY += t.height + 8;
@@ -162,7 +161,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
         if (item.description) {
             const t = this.add.text(padding, currentTextY, item.description, {
                 fontFamily:'fibberish',
-                fontSize:(config.width >= 350 && config.width <= 500) ? '18px' : '20px',
+                fontSize:(config.width >= 350 && config.width <= 500) ? '16px' : '20px',
                 fill:'#fff',
                 wordWrap:{ width: itemWidth - padding*2 }
             }).setOrigin(0,0).setStroke('#44403B', 4);
@@ -176,7 +175,8 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 fontFamily:'fibberish',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :'22px',
                 fill:'#fff',
-                fontStyle:'bold'
+                fontStyle:'bold',
+                wordWrap:{ width: itemWidth - 10 }
             }).setOrigin(0,0).setStroke('#44403B', 5);
             texts.push(titleText);
             currentTextY += titleText.height + 4;
@@ -185,7 +185,8 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 const t = this.add.text(padding, currentTextY, `Institution: ${item.institution}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
-                    fill:'#fff'
+                    fill:'#fff',
+                    wordWrap:{ width: itemWidth - 10 }
                 }).setOrigin(0,0).setStroke('#44403B', 4);
                 texts.push(t);
                 currentTextY += t.height + 2;
@@ -194,7 +195,8 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 const t = this.add.text(padding, currentTextY, `Program: ${item.program}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
-                    fill:'#fff'
+                    fill:'#fff',
+                    wordWrap:{ width: itemWidth - 10 }
                 }).setOrigin(0,0).setStroke('#44403B', 4);
                 texts.push(t);
                 currentTextY += t.height + 2;
@@ -203,7 +205,8 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 const t = this.add.text(padding, currentTextY, `Address: ${item.address}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
-                    fill:'#fff'
+                    fill:'#fff',
+                    wordWrap:{ width: itemWidth - 10 }
                 }).setOrigin(0,0).setStroke('#44403B', 4);
                 texts.push(t);
                 currentTextY += t.height + 4;
@@ -215,7 +218,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
             item.details.forEach(detail => {
                 const t = this.add.text(padding + 16, currentTextY, `• ${detail}`, {
                     fontFamily:'fibberish',
-                    fontSize:'20px',
+                    fontSize: (config.width >= 350 && config.width <= 500) ? '15px' : '20px',
                     fill:'#fff',
                     wordWrap:{ width: itemWidth - padding*3 }
                 }).setOrigin(0,0).setStroke('#44403B', 4);
@@ -280,8 +283,8 @@ else if (data.data.imp === 'core_competence') {
 
         let currentY = -descHeight / 2; // start from top
         const itemSpacing = 100;        // space between items
-        const spriteSize = 70;          // max sprite size
-        const textOffsetX = 120;        // label text X offset
+        const spriteSize = (config.width >= 350 && config.width <= 500) ? 50 : 70;          // max sprite size
+        const textOffsetX = (config.width >= 350 && config.width <= 500) ? 80 : 120;        // label text X offset
         const itemWidth = descWidth;    // width of nineslice
         const itemHeight = 80;          // height of each item background
 
@@ -316,7 +319,7 @@ else if (data.data.imp === 'core_competence') {
                 item.label || '',
                 {
                     fontFamily: 'fibberish',
-                    fontSize: '24px',
+                    fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '24px',
                     fill: '#fff',
                     wordWrap: { width: itemWidth - textOffsetX - 20 }
                 }
@@ -349,7 +352,7 @@ else {
             if (typeof item === 'string') {
                 const t = this.add.text(padding, padding, item, {
                     fontFamily: 'fibberish',
-                    fontSize: '24px',
+                    fontSize: (config.width >= 350 && config.width <= 500) ? '18px': '24px',
                     fill: '#fff',
                     wordWrap: { width: itemWidth - padding*2 }
                 }).setOrigin(0,0);
@@ -359,26 +362,26 @@ else {
             else if (typeof item === 'object' && item !== null) {
                 let currentTextY = padding;
                 if (item.title) {
-                    const t = this.add.text(padding, currentTextY, item.title, { fontFamily:'fibberish', fontSize:'22px', fill:'#fff' }).setOrigin(0,0).setStroke('#44403B', 5);
+                    const t = this.add.text(padding, currentTextY, item.title, { fontFamily:'fibberish', fontSize:(config.width >= 350 && config.width <= 500) ? '18px' : '22px', fill:'#fff', wordWrap:{ width: itemWidth - 10 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
                 }
                 if (item.position) {
-                    const t = this.add.text(padding, currentTextY, item.position, { fontFamily:'fibberish', fontSize:'20px', fill:'#fff' }).setOrigin(0,0).setStroke('#44403B', 5);
+                    const t = this.add.text(padding, currentTextY, item.position, { fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', fill:'#fff', wordWrap:{ width: itemWidth - 10 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
                 }
                 if (item.institution) {
-                    const t = this.add.text(padding, currentTextY, item.institution, { fontFamily:'fibberish', fontSize:'20px', fill:'#fff' }).setOrigin(0,0).setStroke('#44403B', 5);
+                    const t = this.add.text(padding, currentTextY, item.institution, { fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', fill:'#fff', wordWrap:{ width: itemWidth - 10 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
                 }
                 if (item.description) {
-                    const t = this.add.text(padding, currentTextY, item.description, { fontFamily:'fibberish', fontSize:'20px', fill:'#fff', wordWrap:{ width: itemWidth - padding*2 } }).setOrigin(0,0).setStroke('#44403B', 5);
+                    const t = this.add.text(padding, currentTextY, item.description, { fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', fill:'#fff', wordWrap:{ width: itemWidth - padding*2 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
                 }
                 // Details as bullet points
                 if (Array.isArray(item.details)) {
                     item.details.forEach(detail => {
                         const t = this.add.text(padding + 16, currentTextY, `• ${detail}`, { 
-                            fontFamily:'fibberish', fontSize:'20px', fill:'#fff', wordWrap:{ width: itemWidth - padding*3 } 
+                            fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' :  '20px', fill:'#fff', wordWrap:{ width: itemWidth - padding*3 } 
                         }).setOrigin(0,0).setStroke('#44403B', 5);
                         texts.push(t);
                         currentTextY += t.height + 4;
@@ -388,7 +391,7 @@ else {
                     const linkText = item.linkLabel || "[ Click to View ]"; // default text
                     const t = this.add.text(padding, currentTextY, linkText, { 
                         fontFamily: 'fibberish', 
-                        fontSize: '20px', 
+                        fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', 
                         fill: '#00bfff',
                     }).setOrigin(0,0)
                     .setStroke('#ffffff', 4)

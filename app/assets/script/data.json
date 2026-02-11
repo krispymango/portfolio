@@ -84,24 +84,36 @@
             }
         }
     ],
-    "settings":{
-        "language":{
-            "english": false,
-            "arabic": false
-        },
-        "volume":{
-            "bg":4,
-            "sfx":3
-        },
-        "display_mode":{
-            "dark_mode": false,
-            "light_mode": true
-        }
-    },
     "language":[
         "English",
         "Arabic"
     ],
+    "instructions":{
+        "mobile":{
+            "first_time":[
+                "Hello!",
+                "Welcome, to my Portfolio!",
+                "Drag around the screen to explore my portfolio!",
+                "Click on any of the buildings to know about me."
+            ],
+            "default":[
+                "Welcome Back!",
+                "Drag around the screen to explore my portfolio!",
+                "Click on any of the buildings to know about me."
+            ]
+        },
+        "desktop":{
+            "first_time":[
+                "Hello!",
+                "Welcome, to my Portfolio!",
+                "Click on any of the buildings to know about me."
+            ],
+            "default":[
+                "Welcome Back!",
+                "Click on any of the buildings to know about me."
+            ]
+        }
+    },
     "profile_summary":{
         "english":[
             {

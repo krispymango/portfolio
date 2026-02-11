@@ -31,6 +31,12 @@ class messengerMenu extends Phaser.Scene {
         let modalWidth = 500;
         let modalHeight = 500;
 
+        if (config.width >= 350 && config.width <= 500) 
+        {
+            modalWidth = 350;
+            modalHeight = 500;
+        }
+
 
         //-----------------------------
         // MODAL
@@ -91,20 +97,20 @@ class messengerMenu extends Phaser.Scene {
     this.inputName = document.createElement('input');
     this.inputName.type = 'text';
     this.inputName.placeholder = 'Full Name';
-    this.inputName.style.cssText = inputStyle + `width: 400px; left:${centerX - 200}px; top:${centerY - 140}px;`;
+    this.inputName.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY - 140}px;`;
     document.body.appendChild(this.inputName);
 
     // Email
     this.inputEmail = document.createElement('input');
     this.inputEmail.type = 'email';
     this.inputEmail.placeholder = 'Email';
-    this.inputEmail.style.cssText = inputStyle + `width: 400px; left:${centerX - 200}px; top:${centerY - 70}px;`;
+    this.inputEmail.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY - 70}px;`;
     document.body.appendChild(this.inputEmail);
 
     // Message
     this.inputMessage = document.createElement('textarea');
     this.inputMessage.placeholder = 'Your message...';
-    this.inputMessage.style.cssText = inputStyle + `width: 400px; height: 150px; left:${centerX - 200}px; top:${centerY + 0}px; resize: none;`;
+    this.inputMessage.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; height: 150px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY + 0}px; resize: none;`;
     document.body.appendChild(this.inputMessage);
 
         //-----------------------------
@@ -112,11 +118,11 @@ class messengerMenu extends Phaser.Scene {
         //-----------------------------
         const cancelOffsetY = modalHeight / 2 - 40; // 40px padding from bottom of modal
         this.modal_box_cancel_btn = this.add.nineslice(
-            centerX - 100,
+            (config.width >= 350 && config.width <= 500) ? centerX - 60 : centerX - 100,
             centerY + cancelOffsetY,
             'button_one',
             0,
-            180,
+            (config.width >= 350 && config.width <= 500) ? 100 : 180,
             40,
             16,16,16,16
         )
@@ -126,7 +132,7 @@ class messengerMenu extends Phaser.Scene {
         .setTint(0xE8E8E8);
 
         this.modal_box_cancel_btn_text = this.add.text(
-            centerX - 100,
+            (config.width >= 350 && config.width <= 500) ? centerX - 60 : centerX - 100,
             centerY + cancelOffsetY,
             `Cancel`,
             {
@@ -152,11 +158,11 @@ class messengerMenu extends Phaser.Scene {
         //-----------------------------
         
         this.modal_box_submit_btn = this.add.nineslice(
-            centerX + 100,
+            (config.width >= 350 && config.width <= 500) ? centerX + 60 : centerX + 100,
             centerY + cancelOffsetY,
             'button_one',
             0,
-            180,
+            (config.width >= 350 && config.width <= 500) ? 100 : 180,
             40,
             16,16,16,16
         )
@@ -166,7 +172,7 @@ class messengerMenu extends Phaser.Scene {
         .setTint(0x05DF72);
 
         this.modal_box_submit_btn_text = this.add.text(
-            centerX + 100,
+            (config.width >= 350 && config.width <= 500) ? centerX + 60 : centerX + 100,
             centerY + cancelOffsetY,
             `Submit`,
             {
