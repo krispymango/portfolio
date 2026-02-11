@@ -165,7 +165,9 @@
                 "address": "Accra, Ghana"
             },
             {
-                "title": "certificate_courses"
+                "title": "online_courses",
+                "institution": "Udemy",
+                "program": "Website Hacking / Penetration Testing"
             }
         ],
         "arabic": [
@@ -187,7 +189,9 @@
                 "address": "Accra, Ghana"
             },
             {
-                "title": "certificate_courses"
+                "title": "online_courses",
+                "institution": "Udemy",
+                "program": "Website Hacking / Penetration Testing"
             }
         ]
     },
@@ -385,13 +389,13 @@
                 "title": "Kriolay",
                 "skill": "Game Development",
                 "link": "https://kriolay.itch.io",
-                "description": "Created a mobile game app that makes use of apis, optimizes resources and reusing code by creating functions and classes for a smoother and faster gameplay experience."
+                "description": "A personal game development project where I design and build fun, interactive games for mobile and web. I enjoy turning creative ideas into playable experiences while improving my skills in game mechanics, animation, and performance optimization."
             },
             {
                 "title": "Abenchi Media",
                 "skill": "Art & Animation",
                 "link": "https://www.tiktok.com/@abenchimedia",
-                "description": "Developed a user-friendly online vehicle catalog for B2C interactions with search filters and a chat system."
+                "description": "A creative space where I create digital art, character designs, and animations. It allows me to express my creativity, experiment with different styles, and produce visual content that connects with people."
             }
         ],
         "arabic":[
