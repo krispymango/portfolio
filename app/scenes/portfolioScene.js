@@ -13,6 +13,11 @@ class portfolioScene extends Phaser.Scene{
 
         // EASYSTAR CONFIG
         this.easystar = null;
+
+
+        // STORAGE FOR SPRITES
+        this.characters = null;
+        this.charactersById = {};
     }
 
     create(){
@@ -20,6 +25,26 @@ class portfolioScene extends Phaser.Scene{
         this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
 
     
+        let bg = this.sound.get('spring_break');
+
+        if (!bg) {
+            bg = this.sound.add('spring_break', {
+                loop: true,
+                volume: 1
+            });
+        }
+
+        if (!bg.isPlaying) {
+            bg.play();
+        }
+
+        var bgSfxTap = this.sound.add('click_sound', {
+            loop: false,
+            volume: 1
+        });
+
+
+
         // Load interior map and layers
         this.map = this.make.tilemap({ key: 'map' });
 
@@ -150,7 +175,7 @@ class portfolioScene extends Phaser.Scene{
         });
         
 
-        const mapScale = 1.5;
+        const mapScale = 1.6;
 
         // Scale all layers
         this.layers.forEach(layer => layer.setScale(mapScale));
@@ -173,7 +198,7 @@ class portfolioScene extends Phaser.Scene{
 
 
 
-        this.map_manager = new mapManager(this.scene);
+        this.map_manager = new mapManager(this, mapScale);
 
         //--------------------------
         // 2. BUILD PATHFINDING GRID
@@ -186,6 +211,8 @@ class portfolioScene extends Phaser.Scene{
         this.poi = this.map_manager.loadPOIForMap(this.map);
 
 
+        //this.showDebugGrid(this.map, this.map.tileWidth, mapScale, offsetX, offsetY);
+
         //--------------------------
         // 4. SETUP EASYSTAR
         //--------------------------
@@ -194,26 +221,273 @@ class portfolioScene extends Phaser.Scene{
         this.easystar.setAcceptableTiles([0]);
 
         // 1️⃣ Create POIs
-        Object.values(this.poi).forEach(poi => {
-                // 🟢 PLAYER ZONE (separate body)
-                const playerZone = this.add.rectangle(
-                    poi.worldX * mapScale + offsetX,
-                    poi.worldY * mapScale + offsetY,
-                    poi.width * mapScale,
-                    poi.height * mapScale,
-                    0x00ff00,
-                    0.4
-                );
+        // Object.values(this.poi).forEach(poi => {
+        //         // 🟢 PLAYER ZONE (separate body)
+        //         const playerZone = this.add.rectangle(
+        //             poi.worldX * mapScale + offsetX,
+        //             poi.worldY * mapScale + offsetY,
+        //             poi.width * mapScale,
+        //             poi.height * mapScale,
+        //             0xffffff,
+        //             0.4
+        //         );
 
-                console.log('ss');
+        //         console.log('ss');
+        //         if (poi.type == 'clickable_one') 
+        //         {
+                    
+        //         }
                 
-                this.physics.add.existing(playerZone, true);
-                playerZone.body.setSize(poi.width, poi.height);
-                poi.playerZone = playerZone;
-                playerZone.setDepth(999);
+        //         this.physics.add.existing(playerZone, true);
+        //         playerZone.body.setSize(poi.width, poi.height);
+        //         poi.playerZone = playerZone;
+        //         playerZone.setDepth(999);
 
+        //     });
+            
+
+            // Managers
+            this.movementManager = new movementManager(this, mapScale);
+
+            this.movementManager.setMapOffset(offsetX, offsetY);
+
+
+            var tileSize = 16;
+
+            this.characters = this.add.group();
+            this.cache.json.get('config_data').characters.forEach(c => {
+                
+            const sprite = this.physics.add.sprite(0, 0, c.spriteKey, 0);
+                    
+            // Create shadow UNDER the character
+            const shadow = this.add.ellipse(
+                sprite.x,
+                sprite.y,
+                sprite.displayWidth * 1.6, // width
+                sprite.displayHeight * 0.7, // height (flattened)
+                0x000000,
+                0.25 // opacity
+            )
+            .setDepth(8); // character is 9
+
+            // Store reference
+            sprite.shadow = shadow;
+
+            sprite.setPosition(
+                offsetX + (c.x * tileSize * mapScale) + (tileSize * mapScale / 2),
+                offsetY + (c.y * tileSize * mapScale) + (tileSize * mapScale / 2)
+            );
+
+            sprite.setDepth(9);
+            sprite.setOrigin(0.5);
+            sprite.setScale(mapScale); 
+            sprite.characterId = c.id;
+            sprite.characterName = c.name;
+            sprite.random_paths = c.random_paths;
+            sprite.type = c.type;
+            sprite.walkSpeed = c.walkSpeed;
+            sprite.actionState = c.actionState;
+            sprite.body.setSize(
+                c.collisionWidth,
+                c.collisionHeight,
+                false
+            );
+            sprite.spriteKey = c.spriteKey;
+            
+            // Only for player
+            if (c.type === "player") {
+
+                // Arrow
+                const arrow = this.add.image(0, -sprite.displayHeight * 0.6, 'arrow_decorative_e_small')
+                .setScale(0.6);
+                arrow.rotation =  Phaser.Math.DegToRad(180);
+
+                // Optional floating animation (VERY NICE)
+                this.tweens.add({
+                    targets: [arrow],
+                    y: arrow.y - 6,
+                    duration: 800,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: 'sine.inOut'
+                });
+
+                // Name text
+                const nameText = this.add.text(0, -sprite.displayHeight * 1.2, c.name, {
+                    fontFamily: 'fibberish',
+                    fontSize: '18px',
+                    color: '#ffffff',
+                    stroke: '#000000',
+                    strokeThickness: 4
+                })
+                .setOrigin(0.5);
+
+
+                // Optional floating animation (VERY NICE)
+                this.tweens.add({
+                    targets: [nameText],
+                    y: nameText.y - 6,
+                    duration: 800,
+                    yoyo: true,
+                    repeat: -1,
+                    ease: 'sine.inOut'
+                });
+
+
+                // ✅ CREATE CONTAINER
+                const container = this.add.container(sprite.x, sprite.y, [
+                    arrow,
+                    nameText
+                ])
+                .setDepth(100); // always above character
+
+                sprite.uiContainer = container;
+            }
+
+
+            // Move hitbox to bottom center
+            sprite.body.setOffset(
+                (sprite.width - c.collisionWidth) / 2,
+                sprite.height - c.collisionHeight
+            );
+            this.characters.add(sprite);
+            this.charactersById[c.id] = sprite;
+        });
+        
+
+        // const sprite = this.physics.add.sprite(0, 0, 'player', 0);
+
+        // sprite.setPosition(
+        //     offsetX + (26 * tileSize * mapScale) + (tileSize * mapScale / 2),
+        //     offsetY + (22 * tileSize * mapScale) + (tileSize * mapScale / 2)
+        // );
+
+        // sprite.setScale(mapScale); // IMPORTANT if map is scaled
+        // sprite.setDepth(9);
+        // sprite.setOrigin(0.5);
+
+        // Get all NPCs
+        this.npcs = Object.values(this.charactersById).filter(c => c.type === "npc");
+
+        // Start their random movement
+        this.npcs.forEach(npc => {
+            if (!npc.random_paths || npc.random_paths.length === 0) return;
+
+            const moveToRandomPath = () => {
+                // Pick a random destination from the npc.random_paths array
+                const nextDest = Phaser.Utils.Array.GetRandom(npc.random_paths);
+
+                this.movementManager.moveCharacterToTile({
+                    map: this.map,
+                    easystar: this.easystar,
+                    charactersById: this.charactersById,
+                    characterId: npc.characterId,
+                    tileX: nextDest.x,
+                    tileY: nextDest.y,
+                    callback: () => {
+                        // Character reached destination: face down
+                        npc.setFrame(0);
+
+                        // Wait 5 seconds before moving to the next random path
+                        this.time.delayedCall(5000, moveToRandomPath);
+                    }
+                });
+            };
+
+            // Start the loop
+            moveToRandomPath();
+        });
+
+
+        Object.values(this.poi).forEach(poi => {
+
+        //---------------------------
+        // INTERACTIVE ZONE
+        //---------------------------
+        var zone = null;
+        if (poi.type.includes("clickable")) {
+        
+        zone = this.add.zone(
+            poi.worldX * mapScale + offsetX,
+            poi.worldY * mapScale + offsetY,
+            poi.width * mapScale,
+            poi.height * mapScale
+        )
+        .setOrigin(0.5)
+        .setInteractive({ useHandCursor: true })
+        .setDepth(6); // BELOW houses
+        zone.poi = poi;
+    
+        //---------------------------
+        // HIGHLIGHT GRAPHIC
+        //---------------------------
+
+        const highlight = this.add.graphics()
+            .setDepth(9) // still below houses if houses=10
+            .setVisible(false);
+
+        this.drawCorners(highlight, zone);
+
+
+        //---------------------------
+        // POINTER EVENTS
+        //---------------------------
+
+        zone.on('pointerover', () => {
+
+            this.input.setDefaultCursor(
+                'url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer'
+            );
+            
+            highlight.setVisible(true);
+        });
+
+        zone.on('pointerdown', () => {
+
+            this.input.setDefaultCursor(
+                'url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer'
+            );
+                    
+            this.movementManager.moveCharacterToTile({
+            map: this.map,
+            easystar: this.easystar,
+            charactersById: this.charactersById,
+            characterId: 1,
+            tileX: zone.poi.pos_x,
+            tileY: zone.poi.pos_y,
+            callback: () => {
+
+            const character = this.charactersById[1];
+            // Assuming frame 0 of your sprite sheet is the "down" frame
+            character.setFrame(0);
+
+            this.scene.launch('reusableMenu',{
+                data:zone.poi
             });
             
+            }
+        });
+        
+            bgSfxTap.play();
+        });
+
+
+        zone.on('pointerout', () => {
+
+            this.input.setDefaultCursor(
+                'url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer'
+            );
+
+            highlight.setVisible(false);
+        });
+
+        
+        }
+
+    
+        });
+
+
         this.handleCreateTilesData(this,['houses','blacksmith_forge'],this.map);
 
 
@@ -222,14 +496,21 @@ class portfolioScene extends Phaser.Scene{
         // 5. NAVIGATION MENU
         //--------------------------
 
-        var navigation_section = this.add.nineslice(config.width / 2 , 50, 'navigation_menu', 0, 700, 80, 32, 32, 32, 32)
+        var navigation_section = this.add.nineslice(config.width / 2 , 50, 'navigation_menu', 0, 700, 80, 16, 16, 16, 16)
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setTint(0x000000)
         .setAlpha(0.6);
 
-        var socials_section = this.add.nineslice(config.width - 200 , 50, 'navigation_menu', 0, 270, 80, 32, 32, 32, 32)
+        var socials_section = this.add.nineslice(config.width / 2 + 200 + 270 + 50 , 50, 'navigation_menu', 0, 270, 80, 16, 16, 16, 16)
+        .setOrigin(0.5)
+        .setDepth(1000)
+        .setScrollFactor(0) 
+        .setTint(0x000000)
+        .setAlpha(0.6);
+
+        var resume_section = this.add.nineslice(config.width / 2 - 200 - 270 - 50 , 50, 'navigation_menu', 0, 270, 80, 16, 16, 16, 16)
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
@@ -238,33 +519,76 @@ class portfolioScene extends Phaser.Scene{
 
 
 
-        const mail_button = this.add.sprite(socials_section.x - 100 , 50, 'gmail')
+        const mail_button = this.add.sprite(socials_section.x - 70 , 50, 'gmail')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setScale(0.7)
         .setInteractive({ useHandCursor: true });
 
-        const itchio_button = this.add.sprite(socials_section.x - 40, 50, 'itch')
+        mail_button.on('pointerdown', () => {
+            window.open(this.cache.json.get('config_data').contact.english.mail[0].link, "_blank");
+        });
+
+
+        const github_button = this.add.sprite(socials_section.x, 50, 'github')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setScale(0.7)
         .setInteractive({ useHandCursor: true });
 
-        const github_button = this.add.sprite(socials_section.x + 30, 50, 'github')
+        github_button.on('pointerdown', () => {
+            window.open(this.cache.json.get('config_data').contact.english.github[0].link, "_blank");
+        });
+
+        const linkedIn_button = this.add.sprite(socials_section.x + 70, 50, 'linkedIn')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setScale(0.7)
         .setInteractive({ useHandCursor: true });
 
-        const linkedIn_button = this.add.sprite(socials_section.x + 100, 50, 'linkedIn')
+        linkedIn_button.on('pointerdown', () => {
+            window.open(this.cache.json.get('config_data').contact.english.linked_in[0].link, "_blank");
+        });
+
+        const sound_button = this.add.sprite(resume_section.x, 50, 'volume')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setScale(0.7)
         .setInteractive({ useHandCursor: true });
+
+        let isMuted = false; // track mute state
+
+        sound_button.on('pointerdown', () => {
+            isMuted = !isMuted;          // toggle state
+            this.sound.mute = isMuted;   // apply to all sounds
+
+            // Optional: change button texture depending on state
+            if (isMuted) {
+                sound_button.setTexture('volume_off'); // a texture for muted state
+            } else {
+                sound_button.setTexture('volume');    // original texture
+            bgSfxTap.play();
+            }
+        });
+
+
+        // const language_button = this.add.sprite(resume_section.x, 50, 'language')
+        // .setOrigin(0.5)
+        // .setDepth(1000)
+        // .setScrollFactor(0) 
+        // .setScale(0.7)
+        // .setInteractive({ useHandCursor: true });
+
+        // const settings_button = this.add.sprite(resume_section.x + 70, 50, 'settings')
+        // .setOrigin(0.5)
+        // .setDepth(1000)
+        // .setScrollFactor(0) 
+        // .setScale(0.7)
+        // .setInteractive({ useHandCursor: true });
 
         this.anims.create({
             key: 'dayCycle',
@@ -284,6 +608,25 @@ class portfolioScene extends Phaser.Scene{
             repeat: -1
         });
 
+
+        this.anims.create({
+            key: 'nightCycle',
+            frames: [
+                { key: 'night1' },
+                { key: 'night2' },
+                { key: 'night3' },
+                { key: 'night4' },
+                { key: 'night5' },
+                { key: 'night6' },
+                { key: 'night7' },
+                { key: 'night8' },
+                { key: 'night9' },
+                { key: 'night10' }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
         const day_cycle_sprite = this.add.sprite(config.width / 2 , 50, 'day1')
         .setOrigin(0.5)
         .setDepth(1000)
@@ -291,46 +634,67 @@ class portfolioScene extends Phaser.Scene{
         .setScale(0.9)
         .setInteractive({ useHandCursor: true });
 
-        day_cycle_sprite.play('dayCycle');
+        //day_cycle_sprite.play('dayCycle');
+
+        this.dayManager = new dayCycleManager(this, day_cycle_sprite);
 
 
-        this.my_projects = this.add.text(
+        this.my_resume = this.add.text(
             config.width / 2 - 120, 50,
-            'Projects', {
+            'CV/Resume', {
             fontFamily: 'fibberish',
             fontSize: '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
-        .setDepth(1000)
+        .setDepth(1001)
         .setScrollFactor(0) 
         .setStroke('#44403B', 6)
         .setInteractive({ useHandCursor: true });
 
-        this.my_projects.on('pointerover',() => {
+        this.my_resume.on('pointerdown',() => {
             this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
-            this.my_projects.setTint(0xFFB93B);
+            this.my_resume.setTint(0xFFB93B);
         });
 
+        this.my_resume.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+            this.my_resume.setTint(0xFFB93B);
+        });
 
-        this.my_projects.on('pointerout',() => {
+        this.my_resume.on('pointerout',() => {
             this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
-            this.my_projects.setTint(0xFFFFFF);
+            this.my_resume.setTint(0xFFFFFF);
         });
+
+        this.my_resume.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+            this.my_resume.setTint(0xFFFFFF);
+        });
+
+        this.my_resume.on('pointerdown', () => {
+            window.open(this.cache.json.get('config_data').resume.link, "_blank");
+        });
+
 
 
         this.my_home = this.add.text(
-            this.my_projects.x - 120, 50,
+            this.my_resume.x - 120, 50,
             'Home', {
             fontFamily: 'fibberish',
             fontSize: '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
-        .setDepth(1000)
+        .setDepth(1001)
         .setScrollFactor(0) 
         .setStroke('#44403B', 6)
         .setInteractive({ useHandCursor: true });
+
+
+        this.my_home.on('pointerdown', () => {
+            window.location.href = "http://localhost:3000/";
+        });
 
 
         this.my_home.on('pointerover',() => {
@@ -344,44 +708,61 @@ class portfolioScene extends Phaser.Scene{
             this.my_home.setTint(0xFFFFFF);
         });
 
+        this.my_home.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+            this.my_home.setTint(0xFFFFFF);
+        });
 
 
-        this.my_skills = this.add.text(
+        this.my_hobbies = this.add.text(
             config.width / 2 + 120, 50,
-            'Skills', {
+            'Hobbies', {
             fontFamily: 'fibberish',
             fontSize: '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
-        .setDepth(1000)
+        .setDepth(1001)
         .setScrollFactor(0) 
         .setStroke('#44403B', 6)
         .setInteractive({ useHandCursor: true });
 
 
-        this.my_skills.on('pointerover',() => {
+        this.my_hobbies.on('pointerover',() => {
             this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
-            this.my_skills.setTint(0xFFB93B);
+            this.my_hobbies.setTint(0xFFB93B);
         });
 
-
-        this.my_skills.on('pointerout',() => {
+        this.my_hobbies.on('pointerout',() => {
             this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
-            this.my_skills.setTint(0xFFFFFF);
+            this.my_hobbies.setTint(0xFFFFFF);
         });
 
+        this.my_hobbies.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+            this.my_hobbies.setTint(0xFFFFFF);
+        });
 
+        this.my_hobbies.on('pointerdown',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+            
+            this.scene.launch('reusableMenu',{
+                data:{
+                    title:"Hobbies",
+                    imp:"hobbies"
+                }
+            });
+        });
 
         this.my_contact = this.add.text(
-            this.my_skills.x + 120, 50,
+            this.my_hobbies.x + 120, 50,
             'Contact', {
             fontFamily: 'fibberish',
             fontSize: '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
-        .setDepth(1000)
+        .setDepth(1001)
         .setScrollFactor(0) 
         .setStroke('#44403B', 6)
         .setInteractive({ useHandCursor: true });
@@ -397,9 +778,133 @@ class portfolioScene extends Phaser.Scene{
             this.my_contact.setTint(0xFFFFFF);
         });
 
+
+        this.my_contact.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+            this.my_contact.setTint(0xFFFFFF);
+        });
+
+        this.my_contact.on('pointerdown', () => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+            
+            this.scene.launch('messengerMenu',{
+                data:{
+                    title:"Contact",
+                    imp:"hobbies"
+                }
+            });
+        });
+
+
         //this.cache.json.get('config_data');
+
+
+        this.createAnimations('player');
         }
 
+
+        showDebugGrid(tilemap, tileSize = 16, mapScale = 1, offsetX = 0, offsetY = 0) {
+
+            if (this.debugGraphics) this.debugGraphics.clear();
+            else this.debugGraphics = this.add.graphics();
+
+            this.debugGraphics
+                .lineStyle(1, 0xff0000, 0.3)
+                .setDepth(600);
+
+            const scaledTile = tileSize * mapScale;
+
+            for (let y = 0; y < tilemap.height; y++) {
+                for (let x = 0; x < tilemap.width; x++) {
+
+                    this.debugGraphics.strokeRect(
+                        offsetX + (x * scaledTile),
+                        offsetY + (y * scaledTile),
+                        scaledTile,
+                        scaledTile
+                    );
+                }
+            }
+        }
+
+        
+
+        createAnimations(spriteKey) {
+            // DOWN
+            this.anims.create({
+                key: `${spriteKey}_walk_down`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 0, end: 3 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+
+            // RIGHT
+            this.anims.create({
+                key: `${spriteKey}_walk_right`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 8, end: 11 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // UP
+            this.anims.create({
+                key: `${spriteKey}_walk_up`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 16, end: 19 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // IDLE (optional but recommended)
+            this.anims.create({
+                key: `${spriteKey}_idle_down`,
+                frames: [{ key: spriteKey, frame: 0 }],
+                frameRate: 1
+            });
+        }
+
+    drawCorners(graphics, zone) {
+
+        const w = zone.width;
+        const h = zone.height;
+        const x = zone.x - w/2;
+        const y = zone.y - h/2;
+        
+        
+        const len = 12;
+
+        this.add.text(
+            x + w/2, y + h + 20,
+            `${zone.poi.title}`, {
+            fontFamily: 'fibberish',
+            fontSize: '28px',
+            fill: '#fff'
+        })
+        .setOrigin(0.5)
+        .setDepth(1000)
+        .setScrollFactor(0) 
+        .setVisible(true)
+        .setStroke('#44403B', 8);
+
+        graphics.clear();
+        graphics.lineStyle(4, 0xffffff);
+
+        // top-left
+        graphics.lineBetween(x, y, x+len, y);
+        graphics.lineBetween(x, y, x, y+len);
+
+        // top-right
+        graphics.lineBetween(x+w, y, x+w-len, y);
+        graphics.lineBetween(x+w, y, x+w, y+len);
+
+        // bottom-left
+        graphics.lineBetween(x, y+h, x+len, y+h);
+        graphics.lineBetween(x, y+h, x, y+h-len);
+
+        // bottom-right
+        graphics.lineBetween(x+w, y+h, x+w-len, y+h);
+        graphics.lineBetween(x+w, y+h, x+w, y+h-len);
+        }
 
 
     handleAnimateTiles = (scene, delta) => {
@@ -426,6 +931,7 @@ class portfolioScene extends Phaser.Scene{
             }
         });
         };
+
 
     handleCreateTilesData = (scene, tilenames, worldMap) => {
             scene.animatedTiles = [];
@@ -468,9 +974,26 @@ class portfolioScene extends Phaser.Scene{
             console.log("Animated tiles count:", scene.animatedTiles.length);
         };
 
+
     update(time, delta) {
-            // 1️⃣ Update animated tiles
-            this.handleAnimateTiles(this, delta);
+        // 1️⃣ Update animated tiles
+        this.handleAnimateTiles(this, delta);
+
+        //shadows
+        this.characters.getChildren().forEach(char => {
+
+            if (!char.shadow) return;
+
+            char.shadow.setPosition(
+                char.x,
+                char.y + char.displayHeight * 0.5  // tweak until feet match
+            );
+
+            // Player UI
+            if (char.uiContainer) {
+                char.uiContainer.setPosition(char.x, char.y);
+            }
+        });
         }
 }
 

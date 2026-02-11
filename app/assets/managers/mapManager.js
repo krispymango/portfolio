@@ -60,12 +60,16 @@ class mapManager {
             // Parse custom properties
             let typeName = null, 
                 posXName = null, 
-                posYName = null;
+                posYName = null,
+                impYName = null,
+                titleName = null;
 
             if (obj.properties?.length) {
                 typeName = obj.properties.find(p => p.name === "type")?.value ?? null;
                 posXName = obj.properties.find(p => p.name === "pos_x")?.value ?? null;
                 posYName = obj.properties.find(p => p.name === "pos_y")?.value ?? null;
+                impYName = obj.properties.find(p => p.name === "imp")?.value ?? null;
+                titleName = obj.properties.find(p => p.name === "title")?.value ?? null;
             }
 
             // Normalize POI name
@@ -79,8 +83,10 @@ class mapManager {
                 worldY,
                 width,
                 height,
+                title: titleName,
                 pos_x: posXName,
                 pos_y: posYName,
+                imp: impYName,
                 type: typeName
             };
         });

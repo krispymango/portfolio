@@ -12,3 +12,26 @@
 - Add a charcter who is always highlighted who is a messenger and will send an email to me as a contact email form.
 
 - include pointer icon like penclashers
+
+
+
+Important
+------------
+
+- Add contact api for submitting and add a response pop up
+
+- Modify projects section
+
+- Modify Hobbies
+
+- Add Change day night cycle when button clicked
+
+- Add 2 cattle animals 
+
+- Add some birds which can be clicked as contact 
+
+- Make the instructions start with introduction
+
+- Design Mobile Form (Center on main player, instruct to drag camera around and click,  Add menu button for nav buttons )
+
+- If first time visit then start by letting the character walk into the cillage and start introduction. Otherwise welcome visitor and instruct to drag camera to interact.

@@ -72,8 +72,19 @@ class loadScene extends Phaser.Scene{
         
         this.load.image("allowed_paths", "./assets/img/tiles/allowed_paths.png");
 
+        //Player Sprites
+        this.load.spritesheet("player", "./assets/img/characters/player.png", {
+            frameWidth: 20,
+            frameHeight: 20
+        });
+
+
         //Panels
         this.load.image('navigation_menu', './assets/img/ui/transparent_border/panel-transparent-border-010.png');
+
+        //Buttons
+        this.load.image('button_one', './assets/img/ui/transparent_center/panel-transparent-center-010.png');
+
 
         //Day Cycle
         this.load.image('day1', './assets/img/ui/day_night/day/1.png');
@@ -108,9 +119,33 @@ class loadScene extends Phaser.Scene{
         this.load.image('github', './assets/img/ui/socials/Emojis_Social_48x48_35.png');
         this.load.image('linkedIn', './assets/img/ui/socials/Emojis_Social_48x48_37.png');
         this.load.image('tiktok', './assets/img/ui/socials/Emojis_Social_48x48_71.png');
-        this.load.image('newgrounds', '.app/assets/img/ui/socials/Emojis_Social_48x48_76.png');
+        this.load.image('newgrounds', './assets/img/ui/socials/Emojis_Social_48x48_76.png');
          
+        //Misc
+        this.load.image('volume', './assets/img/ui/misc/Emojis_48x48_29.png');
+        this.load.image('volume_off', './assets/img/ui/misc/Emojis_48x48_30.png');
+        this.load.image('language', './assets/img/ui/misc/Emojis_48x48_33.png');
+        this.load.image('settings', './assets/img/ui/misc/Emojis_48x48_62.png');
+        this.load.image('arrow_decorative_e_small', './assets/img/ui/misc/arrow_decorative_e_small.webp');
+        //this.load.image('divider_extra', './assets/img/ui/kenney_ui-pack/PNG/Extra/Default/divider.webp');
          
+        //Logos
+        this.load.image('reactjs', './assets/img/ui/logos/reactjs.png');
+        this.load.image('nodejs', './assets/img/ui/logos/nodejs.png');
+        this.load.image('php', './assets/img/ui/logos/php.png');
+        this.load.image('sql', './assets/img/ui/logos/api.png');
+        this.load.image('api', './assets/img/ui/logos/sql.png');
+        this.load.image('tahoma', './assets/img/ui/logos/tahoma.png');
+        this.load.image('reactnative', './assets/img/ui/logos/reactnative.png');
+        this.load.image('githubTwo', './assets/img/ui/logos/github.png');
+        this.load.image('phaser', './assets/img/ui/logos/phaser.png');
+        this.load.image('ubuntu', './assets/img/ui/logos/ubuntu.png');
+        this.load.image('burpsuite', './assets/img/ui/logos/burpsuite.png');
+
+
+        //Audio
+        this.load.audio("spring_break", ["./assets/audio/spring_break.wav"]);
+        this.load.audio("click_sound", ["./assets/audio/click-b.mp3"]);
     }
 
     create(){

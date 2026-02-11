@@ -1,0 +1,413 @@
+{
+    "characters":[
+        {
+            "id": 1,
+            "name": "Me",
+            "type": "player",
+            "gender": "M",
+            "spriteKey": "player",
+            "x": 26,
+            "y": 22,
+            "collisionWidth":10,
+            "collisionHeight":10,
+            "isCollision":true,
+            "walkSpeed": 130,
+            "actionState": {
+                "direction": "down", 
+                "lockAction": false
+            }
+        },
+        {
+            "id": 2,
+            "name": "John",
+            "type": "npc",
+            "gender": "M",
+            "spriteKey": "player",
+            "x": 30,
+            "y": 32,
+            "collisionWidth":10,
+            "collisionHeight":10,
+            "isCollision":true,
+            "walkSpeed": 250,
+            "random_paths":[
+                {"x":30, "y":27},
+                {"x":31, "y":35},
+                {"x":31, "y":29}
+            ],
+            "actionState": {
+                "direction": "down", 
+                "lockAction": false
+            }
+        },
+        {
+            "id": 3,
+            "name": "John",
+            "type": "npc",
+            "gender": "M",
+            "spriteKey": "player",
+            "x": 34,
+            "y": 24,
+            "collisionWidth":10,
+            "collisionHeight":10,
+            "isCollision":true,
+            "walkSpeed": 200,
+            "random_paths":[
+                {"x":29, "y":22},
+                {"x":31, "y":19},
+                {"x":26, "y":23}
+            ],
+            "actionState": {
+                "direction": "down", 
+                "lockAction": false
+            }
+        }
+    ],
+    "settings":{
+        "language":{
+            "english": false,
+            "arabic": false
+        },
+        "volume":{
+            "bg":4,
+            "sfx":3
+        },
+        "display_mode":{
+            "dark_mode": false,
+            "light_mode": true
+        }
+    },
+    "language":[
+        "English",
+        "Arabic"
+    ],
+    "profile_summary":{
+        "english":[
+            {
+                "fullname": "Abdul - Razak Mahama",
+                "description": "Versatile and results-driven Full-Stack Developer with proven expertise in designing, developing, and deploying scalable web and mobile applications. Adept in both front-end and back-end technologies with strong command over ReactJS, React Native, PHP, NodeJS, Oracle Sql and MySQL. Demonstrated success in creating client-centric solutions across freelance and corporate environments. Known for optimizing performance through database tuning and API integration. Experience spans national service, internships, and independent contracts, highlighting adaptability and technical agility. Highly committed to clean code practices, UI/UX excellence, and agile collaboration. Ready to drive innovation in dynamic development teams."
+            },
+            {
+                "title": "Primary Education",
+                "institution": "Jack and Jill School",
+                "address": "Roman Ridge, Accra, Ghana"
+            },
+            {
+                "title": "Secondary Education",
+                "institution": "Akosombo International School ",
+                "program": "General Science",
+                "address": "Akosombo, Ghana"
+            },
+            {
+                "title": "Tertiary Education",
+                "institution": "University of Ghana",
+                "program": "Bachelor of Science in Information and Technology",
+                "address": "Accra, Ghana"
+            },
+            {
+                "title": "Certificate Courses"
+            }
+        ],
+        "arabic":{
+
+        }
+    },
+    "education":{
+        "english":[
+            {
+                "title": "primary_education",
+                "institution": "Jack and Jill School",
+                "address": "Roman Ridge, Accra, Ghana"
+            },
+            {
+                "title": "secondary_education",
+                "institution": "Akosombo International School ",
+                "program": "General Science",
+                "address": "Akosombo, Ghana"
+            },
+            {
+                "title": "tertiary_education",
+                "institution": "University of Ghana",
+                "program": "Bachelor of Science in Information and Technology",
+                "address": "Accra, Ghana"
+            },
+            {
+                "title": "certificate_courses"
+            }
+        ],
+        "arabic": [
+            {
+                "title": "primary_education",
+                "institution": "Jack and Jill School",
+                "address": "Roman Ridge, Accra, Ghana"
+            },
+            {
+                "title": "secondary_education",
+                "institution": "Akosombo International School ",
+                "program": "General Science",
+                "address": "Akosombo, Ghana"
+            },
+            {
+                "title": "tertiary_education",
+                "institution": "University of Ghana",
+                "program": "Bachelor of Science in Information and Technology",
+                "address": "Accra, Ghana"
+            },
+            {
+                "title": "certificate_courses"
+            }
+        ]
+    },
+    "professional_experience":{
+        "english":[
+            {
+                "institution": "Fiverr",
+                "address": "Accra, Ghana",
+                "from_date": "Jan. 2021",
+                "to_date": "Present",
+                "position": "Freelance Web Developer & Graphic Designer",
+                "link": "https://www.fiverr.com/abenchimedia?public_mode=true",
+                "details": [
+                    "Specialized in 2D character design and animation for international freelance clients.",
+                    "Delivered high-quality digital projects consistently within scope, time, and budget.",
+                    "Earned “Level One Seller” badge due to promptness and client satisfaction excellence.",
+                    "Customized client websites with modern UI features to enhance user experience.",
+                    "Provided branding support through graphics tailored to specific customer markets.",
+                    "Used customer feedback to iterate on deliverables for higher satisfaction rates."
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2021",
+                "to_date": "Oct. 2022",
+                "position": "Junior Full–Stack Web Developer (Intern)",
+                "link": "",
+                "details": [
+                    "Built Shipping Management System to streamline operations at Klaus Point Limited.",
+                    "Created pension registration portal for Prestige Pension Trust Ltd. using web tools.",
+                    "Programmed Apex Trustee Ltd.'s mobile app in React Native for claims processing.",
+                    "Contributed to API development to enable secure data exchange across platforms.",
+                    "Collaborated with senior developers to ensure timely delivery of critical modules.",
+                    "Designed interactive dashboards to visualize user data and improve navigation."
+                ]
+            },
+            {
+                "institution": "Upwork",
+                "address": "Accra, Ghana",
+                "from_date": "Apr. 2022",
+                "to_date": "Present",
+                "position": "Freelance Web Developer",
+                "link": "https://www.upwork.com/freelancers/~01391822cb8ae0bcd4",
+                "details": [
+                    "Engineered a search engine website using APIs from Stack Overflow and Wikipedia.",
+                    "Boosted MySQL database speed using stored procedures for improved responsiveness.",
+                    "Secured repeated contracts by providing timely communication and reliable outcomes.",
+                    "Integrated responsive layouts to ensure seamless experience across all screen sizes.",
+                    "Provided weekly updates to clients for transparent development progress tracking.",
+                    "Tested application features thoroughly to ensure reliability and cross-browser support."
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2022",
+                "to_date": "Aug. 2023",
+                "position": "Junior Software Developer (National Service)",
+                "link": "",
+                "details": [
+                    "Led development of a bulk schedule upload portal for pension fund validation.",
+                    "Created mobile apps for NGIS and Apex Trustee Ltd. to manage client claims.",
+                    "Resolved software bugs and errors to ensure operational continuity and performance."
+                ]
+            },
+            {
+                "institution": "Charisoft Ghana Limited",
+                "address": "Accra, Ghana",
+                "from_date": "Aug. 2023",
+                "to_date": "Present",
+                "position": "Software Developer (Full-Time)",
+                "link": "",
+                "details": [
+                    "Delivered secure web portal for GCB Capital’s investor data and redemption updates.",
+                    "Participated in daily standups and team sprints to ensure agile development flow.",
+                    "Maintained accuracy and consistency of database records across SQL environments."
+                ]
+            }
+        ],
+        "arabic":{
+            
+        }
+    },
+    "core_competence":{
+        "english":[
+            {
+            "img":"reactjs",
+            "label":"ReactJS & React Native"
+            },
+            {
+            "img":"nodejs",
+            "label":"NodeJS"
+            },
+            {
+            "img":"php",
+            "label":"Core PHP"
+            },
+            {
+            "img":"api",
+            "label":"API Integration"
+            },
+            {
+            "img":"sql",
+            "label":"SQL Management (MySql, OracleSql)"
+            },
+            {
+            "img":"githubTwo",
+            "label":"Version Control"
+            },
+            {
+            "img":"tahoma",
+            "label":"Art & Animation"
+            },
+            {
+            "img":"ubuntu",
+            "label":"Linux Systems"
+            },
+            {
+            "img":"phaser",
+            "label":"Phaser JS"
+            },
+            {
+            "img":"burpsuite",
+            "label":"Penetration Testing"
+            }
+        ],
+        "arabic":[
+            {
+            "img":"reactjs",
+            "label":"ReactJS"
+            },
+            {
+            "img":"nodejs",
+            "label":"NodeJS"
+            },
+            {
+            "img":"php",
+            "label":"Core PHP"
+            },
+            {
+            "img":"",
+            "label":"React Native"
+            },
+            {
+            "img":"",
+            "label":"API Integration"
+            },
+            {
+            "img":"",
+            "label":"Database Optimization"
+            },
+            {
+            "img":"",
+            "label":"SQL Management (MySql, OracleSql)"
+            },
+            {
+            "img":"",
+            "label":"Cross Platform Apps"
+            },
+            {
+            "img":"",
+            "label":"Version Control"
+            },
+            {
+            "img":"",
+            "label":"Linux Systems"
+            },
+            {
+            "img":"",
+            "label":"Penetration Testing"
+            }
+        ]
+    },
+    "projects":{
+        "english":[
+            {
+                "title": "Pen Clashers | Classic",
+                "link": "https://play.google.com/store/apps/details?id=com.penc&hl=en",
+                "description": "Created a mobile game app that makes use of apis, optimizes resources and reusing code by creating functions and classes for a smoother and faster gameplay experience."
+            },
+            {
+                "title": "Vehicle Stories",
+                "link": "",
+                "description": "Developed a user-friendly online vehicle catalog for B2C interactions with search filters and a chat system."
+            }
+        ],
+        "arabic":[
+            
+        ]
+    },
+    "hobbies":{
+        "english":[
+            {
+                "title": "Kriolay",
+                "skill": "Game Development",
+                "link": "https://kriolay.itch.io",
+                "description": "Created a mobile game app that makes use of apis, optimizes resources and reusing code by creating functions and classes for a smoother and faster gameplay experience."
+            },
+            {
+                "title": "Abenchi Media",
+                "skill": "Art & Animation",
+                "link": "https://www.tiktok.com/@abenchimedia",
+                "description": "Developed a user-friendly online vehicle catalog for B2C interactions with search filters and a chat system."
+            }
+        ],
+        "arabic":[
+            
+        ]
+    },
+    "contact":{
+        "english":{
+            "address": "A899, Gbawe-Mallam, Accra, Ghana",
+            "email_address": "razakmahama.rm@gmail.com",
+            "mail": [
+                {
+                    "title": "Abdul - Razak Mahama",
+                    "link": "mailto:razakmahama.rm@gmail.com"
+                }
+            ],
+            "linked_in": [
+                {
+                    "title": "Abdul - Razak Mahama",
+                    "link": "https://www.linkedin.com/in/abdul-razak-mahama-52703721b"
+                }
+            ],
+            "instagram":[
+                {
+                    "title": "kriolay",
+                    "link": "https://www.instagram.com/kriolay?igsh=d2xobTV4bWZrYTRm&utm_source=qr"
+                },
+                {
+                    "title": "abenchi media",
+                    "link": "https://www.instagram.com/abenchi_media?igsh=MXJsdWFoYjR6eGx6Yw%3D%3D&utm_source=qr"
+                }
+            ],
+            "github": [
+                {
+                    "title": "krispymango",
+                    "link": "https://github.com/krispymango"
+                }
+            ],
+            "tiktok":[
+                {
+                    "title": "abenchi media",
+                    "link": ""
+                }
+            ]
+        },
+        "arabic":{
+
+        }
+    },
+    "resume":{
+        "link":"http://localhost:3000/resume/Abdul_Razak_Mahama_CV_Resume.pdf"
+    }
+}
