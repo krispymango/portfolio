@@ -377,6 +377,11 @@
                 "title": "API Creator",
                 "link": "https://github.com/krispymango/testapicreate",
                 "description": "A PHP tool for quickly creating and managing APIs, database tables, and CRUD operations, designed to simplify backend development and speed up project setup."
+            },
+            {
+                "title": "Vehicle Stories",
+                "link": "https://github.com/krispymango/vehicle-stories",
+                "description": "Developed a user-friendly online vehicle catalog for B2C interactions with search filters and a chat system."
             }
         ],
         "arabic":[
