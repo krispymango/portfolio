@@ -162,7 +162,17 @@ class instructionsMenu extends Phaser.Scene {
             bgSfxTap.play();
         });
 
+        this.modal_box_previous_btn.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
 
+        this.modal_box_previous_btn.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        this.modal_box_previous_btn.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
 
         //-----------------------------
         // NNEXT BUTTON
@@ -202,6 +212,17 @@ class instructionsMenu extends Phaser.Scene {
             bgSfxTap.play();
         });
 
+        this.modal_box_next_btn.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        this.modal_box_next_btn.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        this.modal_box_next_btn.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
 
         this.updateButtons();
     }

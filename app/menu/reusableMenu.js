@@ -119,7 +119,8 @@ class reusableMenu extends Phaser.Scene {
 // -----------------------------
 // SCROLLABLE DESCRIPTION
 // -----------------------------
-const descWidth = modalWidth - (config.width >= 350 && config.width <= 500) ? 260 : 160;  // leave padding
+var checkDescWidth = (config.width >= 350 && config.width <= 500) ? 260 : 160;
+const descWidth = modalWidth - checkDescWidth;  // leave padding
 const descHeight = modalHeight - 160;
 const centerX = config.width / 2;
 const centerY = config.height / 2;
@@ -577,8 +578,22 @@ this.updateScrollbar();
 
 
         this.modal_box_cancel_btn.on('pointerdown', () => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
             this.fadeOut();
             bgSfxTap.play();
+        });
+
+
+        this.modal_box_cancel_btn.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        this.modal_box_cancel_btn.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        this.modal_box_cancel_btn.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
         });
     }
 

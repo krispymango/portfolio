@@ -93,24 +93,27 @@ class messengerMenu extends Phaser.Scene {
         z-index: 10000;
     `;
 
+    var checkInputAlign = (config.width >= 350 && config.width <= 500) ? 200 : 400;
+    var checkLeftAlign = (config.width >= 350 && config.width <= 500) ? 70 : 200
+
     // Full Name
     this.inputName = document.createElement('input');
     this.inputName.type = 'text';
     this.inputName.placeholder = 'Full Name';
-    this.inputName.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY - 140}px;`;
+    this.inputName.style.cssText = inputStyle + `width: ${checkInputAlign}px; left:${centerX - checkLeftAlign}px; top:${centerY - 140}px;`;
     document.body.appendChild(this.inputName);
 
     // Email
     this.inputEmail = document.createElement('input');
     this.inputEmail.type = 'email';
     this.inputEmail.placeholder = 'Email';
-    this.inputEmail.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY - 70}px;`;
+    this.inputEmail.style.cssText = inputStyle + `width: ${checkInputAlign}px; left:${centerX - checkLeftAlign}px; top:${centerY - 70}px;`;
     document.body.appendChild(this.inputEmail);
 
     // Message
     this.inputMessage = document.createElement('textarea');
     this.inputMessage.placeholder = 'Your message...';
-    this.inputMessage.style.cssText = inputStyle + `width: ${(config.width >= 350 && config.width <= 500) ? 200 : 400}px; height: 150px; left:${centerX - (config.width >= 350 && config.width <= 500) ? 70 : 200}px; top:${centerY + 0}px; resize: none;`;
+    this.inputMessage.style.cssText = inputStyle + `width: ${checkInputAlign}px; height: 150px; left:${centerX - checkLeftAlign}px; top:${centerY + 0}px; resize: none;`;
     document.body.appendChild(this.inputMessage);
 
         //-----------------------------
@@ -152,6 +155,18 @@ class messengerMenu extends Phaser.Scene {
         });
 
 
+        this.modal_box_cancel_btn.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        this.modal_box_cancel_btn.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        this.modal_box_cancel_btn.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
 
         //-----------------------------
         // SUBMIT BUTTON
@@ -189,6 +204,18 @@ class messengerMenu extends Phaser.Scene {
         this.modal_box_submit_btn.on('pointerdown', () => {
             this.submitMessage();
             bgSfxTap.play();
+        });
+
+        this.modal_box_submit_btn.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        this.modal_box_submit_btn.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        this.modal_box_submit_btn.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
         });
 
         //-----------------------------

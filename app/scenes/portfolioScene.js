@@ -616,6 +616,17 @@ class portfolioScene extends Phaser.Scene{
             window.open(this.cache.json.get('config_data').contact.english.mail[0].link, "_blank");
         });
 
+        mail_button.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        mail_button.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        mail_button.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
 
         const github_button = this.add.sprite(
             (this.player) ? socials_section.x : socials_section.x, 
@@ -631,6 +642,18 @@ class portfolioScene extends Phaser.Scene{
             window.open(this.cache.json.get('config_data').contact.english.github[0].link, "_blank");
         });
 
+        github_button.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        github_button.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        github_button.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
         const linkedIn_button = this.add.sprite(
             (this.player) ? socials_section.x + 50 : socials_section.x + 70, 
             (this.player) ? config.height - 40 : 50, 'linkedIn')
@@ -642,6 +665,19 @@ class portfolioScene extends Phaser.Scene{
 
         linkedIn_button.on('pointerdown', () => {
             window.open(this.cache.json.get('config_data').contact.english.linked_in[0].link, "_blank");
+        });
+
+
+        linkedIn_button.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        linkedIn_button.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        linkedIn_button.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
         });
 
         const sound_button = this.add.sprite(
@@ -670,6 +706,17 @@ class portfolioScene extends Phaser.Scene{
         });
 
 
+        sound_button.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        sound_button.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        sound_button.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
         // const language_button = this.add.sprite(resume_section.x, 50, 'language')
         // .setOrigin(0.5)
         // .setDepth(1000)
@@ -729,10 +776,6 @@ class portfolioScene extends Phaser.Scene{
         .setScrollFactor(0) 
         .setScale((this.player) ? 0.65 : 0.9)
         .setInteractive({ useHandCursor: true });
-
-        day_cycle_sprite.on('pointerdown',() => {
-            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
-        });
 
         day_cycle_sprite.on('pointerover',() => {
             this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
