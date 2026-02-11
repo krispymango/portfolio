@@ -8,6 +8,10 @@ class loadScene extends Phaser.Scene{
         // Load data
         this.load.json('script', './assets/script/data.json');
 
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+
+
         // --- Progress bar ---
         this.progressBox = this.add.graphics();
         this.progressBox.fillStyle(0x222222, 0.8);
@@ -25,6 +29,15 @@ class loadScene extends Phaser.Scene{
             this.progressBar.fillRect(0, 0, 300 * value, 30);
             this.progressBar.x = config.width / 2 - 150;
             this.progressBar.y = config.height / 2 + 30;
+
+
+            const percent = Math.round(value * 100);
+
+            // Update HTML progress bar
+            progressBar.style.width = `${percent}%`;
+
+            // Update HTML percentage text
+            progressText.innerText = `${percent}%`;
         });
 
         // this.load.on('complete', () => {
@@ -78,6 +91,15 @@ class loadScene extends Phaser.Scene{
             frameHeight: 20
         });
 
+        this.load.spritesheet("chicken", "./assets/img/characters/chicken.png", {
+            frameWidth: 16,
+            frameHeight: 16
+        });
+
+        this.load.spritesheet("chick", "./assets/img/characters/chick.png", {
+            frameWidth: 16,
+            frameHeight: 16
+        });
 
         //Panels
         this.load.image('navigation_menu', './assets/img/ui/transparent_border/panel-transparent-border-010.png');

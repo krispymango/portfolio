@@ -2,6 +2,7 @@ class dayCycleManager {
     constructor(scene, sprite){
         this.scene = scene;
         this.sprite = sprite;
+        this.manualOverride = false;
 
         this.currentMode = null;
 
@@ -22,6 +23,8 @@ class dayCycleManager {
 
     checkTime(){
 
+        if(this.manualOverride) return;
+
         const hour = new Date().getHours();
 
         const isDay = hour >= 6 && hour < 18;
@@ -34,6 +37,7 @@ class dayCycleManager {
         }
     }
 
+
     setDay(){
 
         this.currentMode = "day";
@@ -43,9 +47,10 @@ class dayCycleManager {
         // removes dark tint
         this.scene.cameras.main.setBackgroundColor("#87CEEB");
 
-        // this.scene.layers.forEach(layer=>{
-        //     layer.clearTint();
-        // });
+        this.scene.layers.forEach(layer=>{
+            //layer.clearTint();
+            layer.setTint(0xffffff);
+        });
 
         console.log("Switched to DAY");
     }
@@ -65,6 +70,19 @@ class dayCycleManager {
 
         console.log("Switched to NIGHT");
     }
+
+    toggleCycle(){
+
+        this.manualOverride = true;
+
+        if(this.currentMode === "day"){
+            this.setNight();
+        }else{
+            this.setDay();
+        }
+    }
+
+
 }
 
 window.dayCycleManager = dayCycleManager;

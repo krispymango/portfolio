@@ -1,34 +1,17 @@
 {
     "characters":[
         {
-            "id": 1,
-            "name": "Me",
-            "type": "player",
-            "gender": "M",
-            "spriteKey": "player",
-            "x": 26,
-            "y": 22,
-            "collisionWidth":10,
-            "collisionHeight":10,
-            "isCollision":true,
-            "walkSpeed": 130,
-            "actionState": {
-                "direction": "down", 
-                "lockAction": false
-            }
-        },
-        {
             "id": 2,
             "name": "John",
             "type": "npc",
             "gender": "M",
-            "spriteKey": "player",
+            "spriteKey": "chicken",
             "x": 30,
             "y": 32,
             "collisionWidth":10,
             "collisionHeight":10,
             "isCollision":true,
-            "walkSpeed": 250,
+            "walkSpeed": 350,
             "random_paths":[
                 {"x":30, "y":27},
                 {"x":31, "y":35},
@@ -44,18 +27,57 @@
             "name": "John",
             "type": "npc",
             "gender": "M",
-            "spriteKey": "player",
+            "spriteKey": "chicken",
             "x": 34,
             "y": 24,
             "collisionWidth":10,
             "collisionHeight":10,
             "isCollision":true,
-            "walkSpeed": 200,
+            "walkSpeed": 400,
             "random_paths":[
                 {"x":29, "y":22},
                 {"x":31, "y":19},
-                {"x":26, "y":23}
+                {"x":31, "y":24}
             ],
+            "actionState": {
+                "direction": "down", 
+                "lockAction": false
+            }
+        },
+        {
+            "id": 4,
+            "name": "John",
+            "type": "npc",
+            "gender": "M",
+            "spriteKey": "chick",
+            "x": 43,
+            "y": 24,
+            "collisionWidth":10,
+            "collisionHeight":10,
+            "isCollision":true,
+            "walkSpeed": 400,
+            "random_paths":[
+                {"x":45, "y":28},
+                {"x":46, "y":33},
+                {"x":46, "y":23}
+            ],
+            "actionState": {
+                "direction": "down", 
+                "lockAction": false
+            }
+        },
+        {
+            "id": 1,
+            "name": "Me",
+            "type": "player",
+            "gender": "M",
+            "spriteKey": "player",
+            "x": 26,
+            "y": 22,
+            "collisionWidth":10,
+            "collisionHeight":10,
+            "isCollision":true,
+            "walkSpeed": 130,
             "actionState": {
                 "direction": "down", 
                 "lockAction": false

@@ -148,7 +148,7 @@ class messengerMenu extends Phaser.Scene {
 
 
         //-----------------------------
-        // CANCEL BUTTON
+        // SUBMIT BUTTON
         //-----------------------------
         
         this.modal_box_submit_btn = this.add.nineslice(

@@ -26,12 +26,12 @@ Important
 
 - Add Change day night cycle when button clicked
 
-- Add 2 cattle animals 
+- Add 2 cattle animals /
 
 - Add some birds which can be clicked as contact 
 
 - Make the instructions start with introduction
 
-- Design Mobile Form (Center on main player, instruct to drag camera around and click,  Add menu button for nav buttons )
+- Design Mobile Form (Center on main player, instruct to drag camera around and click,  Add menu button for nav buttons ) 
 
-- If first time visit then start by letting the character walk into the cillage and start introduction. Otherwise welcome visitor and instruct to drag camera to interact.
+- If first time visit then start by welcoming visitor and instruct to drag camera to interact otherwise say welcome back and remind how to navigate.

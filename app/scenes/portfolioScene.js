@@ -24,7 +24,17 @@ class portfolioScene extends Phaser.Scene{
         //Cursor Default Icon
         this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
 
-    
+        const loader = document.getElementById('fakeLoader');
+
+        setTimeout(() => {
+            loader.classList.add('hide');
+        }, 120); // small delay prevents Phaser flicker
+
+        loader.addEventListener('transitionend', () => {
+            loader.remove();
+        });
+
+            
         let bg = this.sound.get('spring_break');
 
         if (!bg) {
@@ -259,12 +269,15 @@ class portfolioScene extends Phaser.Scene{
                 
             const sprite = this.physics.add.sprite(0, 0, c.spriteKey, 0);
                     
+            var shad_width = (c.type == 'player') ? 1.6 : 1.2;
+            var shad_height = (c.type == 'player') ? 0.7 : 0.5;
+
             // Create shadow UNDER the character
             const shadow = this.add.ellipse(
                 sprite.x,
                 sprite.y,
-                sprite.displayWidth * 1.6, // width
-                sprite.displayHeight * 0.7, // height (flattened)
+                sprite.displayWidth * shad_width, // width
+                sprite.displayHeight * shad_height, // height (flattened)
                 0x000000,
                 0.25 // opacity
             )
@@ -355,6 +368,16 @@ class portfolioScene extends Phaser.Scene{
         });
         
 
+        if (config.width >= 350 && config.width <= 500) 
+        {
+            this.player = Object.values(this.charactersById).find(c => c.type === "player");
+
+            console.log('this.player: ',this.player);
+            
+
+            if (this.player) this.cameras.main.centerOn(Number(this.player.x), Number(this.player.y));
+            //if (this.player) this.cameras.main.startFollow(this.player, true, 2, 2); .stopFollow();
+        }
         // const sprite = this.physics.add.sprite(0, 0, 'player', 0);
 
         // sprite.setPosition(
@@ -366,11 +389,38 @@ class portfolioScene extends Phaser.Scene{
         // sprite.setDepth(9);
         // sprite.setOrigin(0.5);
 
+        if (config.width >= 350 && config.width <= 500) 
+        {
+        const cam = this.cameras.main;
+
+        // IMPORTANT: set camera bounds to your map
+        cam.setBounds(offsetX, offsetY, mapWidth, mapHeight);
+
+        // Enable dragging
+        this.input.on('pointermove', (pointer) => {
+
+            // Only drag if pointer is down
+            if (!pointer.isDown) return;
+
+            // Prevent dragging when clicking UI
+            if (pointer.wasTouch && pointer.downElement?.tagName === "BUTTON") return;
+
+            cam.scrollX -= (pointer.x - pointer.prevPosition.x);
+            cam.scrollY -= (pointer.y - pointer.prevPosition.y);
+        });
+
+        }
+        
+
+
         // Get all NPCs
         this.npcs = Object.values(this.charactersById).filter(c => c.type === "npc");
 
         // Start their random movement
         this.npcs.forEach(npc => {
+
+            this.createAnimationsAnimals(npc.spriteKey);
+
             if (!npc.random_paths || npc.random_paths.length === 0) return;
 
             const moveToRandomPath = () => {
@@ -386,7 +436,7 @@ class portfolioScene extends Phaser.Scene{
                     tileY: nextDest.y,
                     callback: () => {
                         // Character reached destination: face down
-                        npc.setFrame(0);
+                        npc.setFrame(6);
 
                         // Wait 5 seconds before moving to the next random path
                         this.time.delayedCall(5000, moveToRandomPath);
@@ -443,7 +493,7 @@ class portfolioScene extends Phaser.Scene{
         });
 
         zone.on('pointerdown', () => {
-
+            if (this.player) this.cameras.main.startFollow(this.player, true, 0.5, 0.5);
             this.input.setDefaultCursor(
                 'url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer'
             );
@@ -460,6 +510,8 @@ class portfolioScene extends Phaser.Scene{
             const character = this.charactersById[1];
             // Assuming frame 0 of your sprite sheet is the "down" frame
             character.setFrame(0);
+
+            this.cameras.main.stopFollow();
 
             this.scene.launch('reusableMenu',{
                 data:zone.poi
@@ -495,22 +547,51 @@ class portfolioScene extends Phaser.Scene{
         //--------------------------
         // 5. NAVIGATION MENU
         //--------------------------
-
-        var navigation_section = this.add.nineslice(config.width / 2 , 50, 'navigation_menu', 0, 700, 80, 16, 16, 16, 16)
+        var dayCycle_section = this.add.nineslice(
+            config.width / 2 , 
+            40, 
+            'navigation_menu', 0, 
+            (this.player) ? 100 : 700, 
+            (this.player) ? 70 : 80, 
+            16, 16, 16, 16)
+        .setOrigin(0.5)
+        .setDepth(1000)
+        .setScrollFactor(0) 
+        .setTint(0x000000)
+        .setVisible((this.player) ? true : false)
+        .setAlpha(0.6);
+        
+        var navigation_section = this.add.nineslice(
+            config.width / 2 , 
+            (this.player) ? 110 : 50, 
+            'navigation_menu', 0, 
+            (this.player) ? 350 : 700, 
+            (this.player) ? 60 : 80, 
+            16, 16, 16, 16)
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setTint(0x000000)
         .setAlpha(0.6);
 
-        var socials_section = this.add.nineslice(config.width / 2 + 200 + 270 + 50 , 50, 'navigation_menu', 0, 270, 80, 16, 16, 16, 16)
+        var socials_section = this.add.nineslice(
+            (this.player) ? config.width / 2 + 90 : config.width / 2 + 200 + 270 + 50 , 
+            (this.player) ? config.height - 40 : 50, 
+            'navigation_menu', 0,
+            (this.player) ? 170 : 270, 
+            (this.player) ? 50 : 80, 16, 16, 16, 16)
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
         .setTint(0x000000)
         .setAlpha(0.6);
 
-        var resume_section = this.add.nineslice(config.width / 2 - 200 - 270 - 50 , 50, 'navigation_menu', 0, 270, 80, 16, 16, 16, 16)
+        var resume_section = this.add.nineslice(
+            (this.player) ? config.width / 2 - 130 : config.width / 2 - 200 - 270 - 50 , 
+            (this.player) ? config.height - 40 : 50, 
+            'navigation_menu', 0, 
+            (this.player) ? 90 : 270, 
+            (this.player) ? 50 : 80, 16, 16, 16, 16)
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
@@ -519,11 +600,13 @@ class portfolioScene extends Phaser.Scene{
 
 
 
-        const mail_button = this.add.sprite(socials_section.x - 70 , 50, 'gmail')
+        const mail_button = this.add.sprite(
+            (this.player) ? socials_section.x - 50 : socials_section.x - 70 , 
+            (this.player) ? config.height - 40 : 50, 'gmail')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
-        .setScale(0.7)
+        .setScale((this.player) ? 0.6 : 0.7)
         .setInteractive({ useHandCursor: true });
 
         mail_button.on('pointerdown', () => {
@@ -531,33 +614,41 @@ class portfolioScene extends Phaser.Scene{
         });
 
 
-        const github_button = this.add.sprite(socials_section.x, 50, 'github')
+        const github_button = this.add.sprite(
+            (this.player) ? socials_section.x : socials_section.x, 
+            (this.player) ? config.height - 40 : 50, 
+            'github')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
-        .setScale(0.7)
+        .setScale((this.player) ? 0.6 : 0.7)
         .setInteractive({ useHandCursor: true });
 
         github_button.on('pointerdown', () => {
             window.open(this.cache.json.get('config_data').contact.english.github[0].link, "_blank");
         });
 
-        const linkedIn_button = this.add.sprite(socials_section.x + 70, 50, 'linkedIn')
+        const linkedIn_button = this.add.sprite(
+            (this.player) ? socials_section.x + 50 : socials_section.x + 70, 
+            (this.player) ? config.height - 40 : 50, 'linkedIn')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
-        .setScale(0.7)
+        .setScale((this.player) ? 0.6 : 0.7)
         .setInteractive({ useHandCursor: true });
 
         linkedIn_button.on('pointerdown', () => {
             window.open(this.cache.json.get('config_data').contact.english.linked_in[0].link, "_blank");
         });
 
-        const sound_button = this.add.sprite(resume_section.x, 50, 'volume')
+        const sound_button = this.add.sprite(
+            (this.player) ? resume_section.x : resume_section.x, 
+            (this.player) ? config.height - 40 : 50, 
+            'volume')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
-        .setScale(0.7)
+        .setScale((this.player) ? 0.6 : 0.7)
         .setInteractive({ useHandCursor: true });
 
         let isMuted = false; // track mute state
@@ -627,12 +718,34 @@ class portfolioScene extends Phaser.Scene{
             repeat: -1
         });
 
-        const day_cycle_sprite = this.add.sprite(config.width / 2 , 50, 'day1')
+        const day_cycle_sprite = this.add.sprite(
+            config.width / 2, 
+            (this.player) ? 40 : 50, 'day1')
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0) 
-        .setScale(0.9)
+        .setScale((this.player) ? 0.65 : 0.9)
         .setInteractive({ useHandCursor: true });
+
+        day_cycle_sprite.on('pointerdown',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        day_cycle_sprite.on('pointerover',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/hand_thin_point.png), pointer');
+        });
+
+        day_cycle_sprite.on('pointerout',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        day_cycle_sprite.on('pointerup',() => {
+            this.input.setDefaultCursor('url(./assets/img/ui/cursors/Default/pointer_c_shaded.png), pointer');
+        });
+
+        day_cycle_sprite.on('pointerdown', () => {   
+            this.dayManager.toggleCycle();
+        });
 
         //day_cycle_sprite.play('dayCycle');
 
@@ -640,10 +753,11 @@ class portfolioScene extends Phaser.Scene{
 
 
         this.my_resume = this.add.text(
-            config.width / 2 - 120, 50,
-            'CV/Resume', {
+            (this.player) ? config.width / 2 - 50 : config.width / 2 - 120, 
+            (this.player) ? 110 : 50,
+            '● Resume', {
             fontFamily: 'fibberish',
-            fontSize: '26px',
+            fontSize: (this.player) ? '18px' : '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
@@ -679,10 +793,11 @@ class portfolioScene extends Phaser.Scene{
 
 
         this.my_home = this.add.text(
-            this.my_resume.x - 120, 50,
-            'Home', {
+            (this.player) ? this.my_resume.x - 70 : this.my_resume.x - 120,
+            (this.player) ? 110 : 50,
+            '● Home', {
             fontFamily: 'fibberish',
-            fontSize: '26px',
+            fontSize: (this.player) ? '18px' : '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
@@ -715,10 +830,11 @@ class portfolioScene extends Phaser.Scene{
 
 
         this.my_hobbies = this.add.text(
-            config.width / 2 + 120, 50,
-            'Hobbies', {
+            (this.player) ? config.width / 2 + 30 : config.width / 2 + 120, 
+            (this.player) ? 110 : 50,
+            '● Hobbies', {
             fontFamily: 'fibberish',
-            fontSize: '26px',
+            fontSize: (this.player) ? '18px' : '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
@@ -755,10 +871,11 @@ class portfolioScene extends Phaser.Scene{
         });
 
         this.my_contact = this.add.text(
-            this.my_hobbies.x + 120, 50,
-            'Contact', {
+            (this.player) ? this.my_hobbies.x + 80 : this.my_hobbies.x + 120, 
+            (this.player) ? 110 : 50,
+            '● Contact', {
             fontFamily: 'fibberish',
-            fontSize: '26px',
+            fontSize: (this.player) ? '18px' : '26px',
             fill: '#fff'
         })
         .setOrigin(0.5)
@@ -863,6 +980,40 @@ class portfolioScene extends Phaser.Scene{
             });
         }
 
+        createAnimationsAnimals(spriteKey) {
+
+            // RIGHT
+            this.anims.create({
+                key: `${spriteKey}_walk_right`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 6, end: 11 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // UP
+            this.anims.create({
+                key: `${spriteKey}_walk_up`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 6, end: 11 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // DOWN
+            this.anims.create({
+                key: `${spriteKey}_walk_down`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 6, end: 11 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // IDLE (optional but recommended)
+            this.anims.create({
+                key: `${spriteKey}_idle_down`,
+                frames: [{ key: spriteKey, frame: 6 }],
+                frameRate: 1
+            });
+        }
+
     drawCorners(graphics, zone) {
 
         const w = zone.width;
@@ -882,7 +1033,6 @@ class portfolioScene extends Phaser.Scene{
         })
         .setOrigin(0.5)
         .setDepth(1000)
-        .setScrollFactor(0) 
         .setVisible(true)
         .setStroke('#44403B', 8);
 
@@ -984,9 +1134,11 @@ class portfolioScene extends Phaser.Scene{
 
             if (!char.shadow) return;
 
+            var shad_pos = (char.type == 'player') ? 0.5 : 0.4;
+
             char.shadow.setPosition(
                 char.x,
-                char.y + char.displayHeight * 0.5  // tweak until feet match
+                char.y + char.displayHeight * shad_pos  // tweak until feet match
             );
 
             // Player UI

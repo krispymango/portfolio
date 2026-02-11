@@ -31,7 +31,7 @@
     <script src="./scenes/game.js"></script>
 
     <title>Portfolio | Abdul-Razak Mahama</title>
-    <style>
+    <!-- <style>
         @font-face {
             font-family: 'Kenney_Future_Narrow';
             src: url('./assets/fonts/Kenney_Future_Narrow.ttf');
@@ -45,8 +45,34 @@
         .fancy-loader{
             width: 100%;
             height: 100%;
-            display: none;
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: 9999;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease;
         }
+
+        .fancy-loader.hide {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .fancy-loader img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit:cover;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: 9999;
+        }l
 
         canvas{
             position: absolute;
@@ -56,9 +82,239 @@
             transform: translateY(-50%);
             margin: 0px auto;
         }
+
+        #progressContainer{ 
+            z-index: 9999;           
+            width: 200px;
+            height: 20px;
+            background: rgba(34, 34, 34, 0.8);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 20px;
+            border: 5px solid #21BCFF;
+            transform: translateX(-50%);
+            overflow: hidden;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+
+        #progressBar{
+            z-index: 9999;
+            width: 0%;
+            height: 100%;
+            background: #A2F4FD;
+        }
+
+
+        #progressText{
+            z-index: 9999;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            font-family: 'fibberish';
+            transform: translateX(-50%);
+            color: #34A6F4;
+            font-size: 30px;
+        }
+
+        .bg_overlay{
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 9999;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+    </style> -->
+
+    <style>
+        @font-face {
+    font-family: 'Kenney_Future_Narrow';
+    src: url('./assets/fonts/Kenney_Future_Narrow.ttf');
+}
+
+@font-face {
+    font-family: 'fibberish';
+    src: url('./assets/fonts/fibberish.ttf');
+}
+
+
+/* 🔥 LOADER (Main Fixes Here) */
+.fancy-loader{
+    position: fixed;        /* VERY IMPORTANT */
+    inset: 0;               /* replaces top/left/right/bottom */
+    width: 100%;
+    height: 100vh;
+
+    z-index: 9999;
+    overflow: hidden;
+
+    display: block;
+
+    /* Smooth animation */
+    transition: transform 0.65s cubic-bezier(.77,0,.18,1),
+                opacity 0.5s ease;
+
+    /* Prevent Phaser flicker */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+
+/* Hide animation */
+.fancy-loader.hide {
+    transform: translateY(-100%) scale(1.03);
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* Images */
+.fancy-loader img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /* Remove z-index — parent handles stacking */
+}
+
+
+/* Overlay */
+.bg_overlay{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+/* Canvas */
+canvas{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    margin: auto;
+}
+
+
+
+/* Progress Bar Container */
+#progressContainer{ 
+    width: 200px;
+    height: 20px;
+
+    background: rgba(34, 34, 34, 0.85);
+
+    position: absolute;
+    top: 60%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 20px;
+    border: 5px solid #21BCFF;
+
+    overflow: hidden;
+}
+
+
+/* Progress Bar */
+#progressBar{
+    width: 0%;
+    height: 100%;
+    background: #A2F4FD;
+
+    transition: width .25s ease;
+}
+
+
+/* Percentage Text */
+#progressText{
+    position: absolute;
+    top: calc(60% - 55px);
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-family: 'fibberish';
+    color: #ffffff;
+    font-size: 32px;
+}
+
+#BriefText{
+    position: absolute;
+    top: calc(60% - 135px);
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-family: 'fibberish';
+    color: #ffffff;
+    font-size: 39px;
+    width: 100%;
+    text-align: center;
+}
+
     </style>
 </head>
 <body>
-    <div class="fancy-loader"></div>
+    <div id="fakeLoader" class="fancy-loader">
+        <!-- <img src="./assets/img/loader/day/1.png" />
+        <img src="./assets/img/loader/day/2.png" />
+        <img src="./assets/img/loader/day/4.png" /> -->
+
+        <!-- <img src="./assets/img/loader/night/1.png" />
+        <img src="./assets/img/loader/night/2.png" />
+        <img src="./assets/img/loader/night/3.png" />
+        <img src="./assets/img/loader/night/4.png" /> -->
+        <div class="bg_overlay"></div>
+
+      <!-- Progress bar container -->
+        <div id="progressContainer">
+            <div id="progressBar"></div>
+        </div>
+
+        <!-- Welcome text -->
+        <div id="BriefText">Good Morning</div>
+
+        <!-- Percentage text -->
+        <div id="progressText">0%</div>
+    </div>
 </body>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const hour = new Date().getHours();
+        const isDay = hour >= 6 && hour < 18;
+
+        const loader = document.getElementById("fakeLoader");
+        const briefText = document.getElementById("BriefText");
+
+        const folder = isDay ? "day" : "night";
+
+        if(isDay){
+            briefText.innerText = hour < 12 ? "Good Morning" : "Good Afternoon";
+        }else{
+            briefText.innerText = "Good Evening";
+        }
+
+        for(let i = 4; i >= 1; i--){
+
+            const img = document.createElement("img");
+            img.src = `./assets/img/loader/${folder}/${i}.png`;
+
+            console.log('img.src:  ',img.src);
+            
+
+            loader.prepend(img);
+        }
+
+    });
+    </script>
+
 </html>

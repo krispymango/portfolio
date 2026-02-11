@@ -60,13 +60,27 @@ class reusableMenu extends Phaser.Scene {
         .setAlpha(0.6)
         .setDepth(999);
 
-        // Decide modal size
-        let modalWidth = 900;
+
+        let modalWidth = 800;
         let modalHeight = 600;
+        
+        if (config.width >= 350 && config.width <= 500) 
+        {
+            modalWidth = 300;
+            modalHeight = 300;
+        }
 
         if (data.data.imp !== 'education' && data.data.imp !== 'professional_experience') {
-            modalWidth = 900;   // smaller width
-            modalHeight = 400;  // smaller height
+            if (config.width >= 350 && config.width <= 500) 
+            {
+                modalWidth = 300;   // smaller width
+                modalHeight = 300;  // smaller height
+            }
+            else
+            {
+                modalWidth = 900;   // smaller width
+                modalHeight = 400;  // smaller height
+            }
         }
 
         //-----------------------------
@@ -96,7 +110,7 @@ class reusableMenu extends Phaser.Scene {
             `${data.data.title || '-'}`,
             {
                 fontFamily: 'fibberish',
-                fontSize: '30px',
+                fontSize: (config.width >= 350 && config.width <= 500) ? '20px' : '30px',
                 fill: '#fff'
             }
         )
@@ -136,7 +150,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
         if (item.fullname) {
             const t = this.add.text(padding, currentTextY, `Name: ${item.fullname}`, {
                 fontFamily:'fibberish',
-                fontSize:'26px',
+                fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :  '26px',
                 fill:'#fff',
                 fontStyle:'bold'
             }).setOrigin(0,0).setStroke('#44403B', 5);
@@ -148,7 +162,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
         if (item.description) {
             const t = this.add.text(padding, currentTextY, item.description, {
                 fontFamily:'fibberish',
-                fontSize:'20px',
+                fontSize:(config.width >= 350 && config.width <= 500) ? '18px' : '20px',
                 fill:'#fff',
                 wordWrap:{ width: itemWidth - padding*2 }
             }).setOrigin(0,0).setStroke('#44403B', 4);
@@ -160,7 +174,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
         if (item.title) {
             const titleText = this.add.text(padding, currentTextY, item.title.replace('_',' '), {
                 fontFamily:'fibberish',
-                fontSize:'22px',
+                fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :'22px',
                 fill:'#fff',
                 fontStyle:'bold'
             }).setOrigin(0,0).setStroke('#44403B', 5);
@@ -168,7 +182,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
             currentTextY += titleText.height + 4;
 
             if (item.institution) {
-                const t = this.add.text(padding, currentTextY, item.institution, {
+                const t = this.add.text(padding, currentTextY, `Institution: ${item.institution}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
                     fill:'#fff'
@@ -177,7 +191,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 currentTextY += t.height + 2;
             }
             if (item.program) {
-                const t = this.add.text(padding, currentTextY, item.program, {
+                const t = this.add.text(padding, currentTextY, `Program: ${item.program}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
                     fill:'#fff'
@@ -186,7 +200,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 currentTextY += t.height + 2;
             }
             if (item.address) {
-                const t = this.add.text(padding, currentTextY, item.address, {
+                const t = this.add.text(padding, currentTextY, `Address: ${item.address}`, {
                     fontFamily:'fibberish',
                     fontSize:'20px',
                     fill:'#fff'
@@ -253,9 +267,9 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
 } else if (data.data.imp === 'education') {
     if (Array.isArray(descData)) {
         displayText = descData.map(item => {
-            let line = `${item.title.replace('_',' ')}\n${item.institution || ''}`;
-            if (item.program) line += ` - ${item.program}`;
-            if (item.address) line += `\n${item.address}`;
+            let line = `${item.title.replace('_',' ')}\n Institution:${item.institution || ''}`;
+            if (item.program) line += ` - Program: ${item.program}`;
+            if (item.address) line += `\n Address: ${item.address}`;
             return line;
         }).join('\n\n');
     }
@@ -573,7 +587,7 @@ this.updateScrollbar();
         });
 
         this.tweens.add({
-            targets: [this.modal_box_title, this.descContainer, this.modal_box_cancel_btn, this.modal_box_cancel_btn_text],
+            targets: [this.modal_box_title, this.descContainer, this.modal_box_cancel_btn, this.modal_box_cancel_btn_text, this.modal_box_submit_btn, this.modal_box_submit_btn_text],
             alpha: { from: 0, to: 1 },
             duration: duration + 100
         });
@@ -581,7 +595,7 @@ this.updateScrollbar();
 
     fadeOut(duration = 200) {
         this.tweens.add({
-            targets: [this.overlay, this.modal_box, this.modal_box_title, this.descContainer, this.modal_box_cancel_btn, this.modal_box_cancel_btn_text],
+            targets: [this.overlay, this.modal_box, this.modal_box_title, this.descContainer, this.modal_box_cancel_btn, this.modal_box_cancel_btn_text, this.modal_box_submit_btn, this.modal_box_submit_btn_text],
             alpha: 0,
             duration,
             onComplete: () => { this.scene.stop(); }
