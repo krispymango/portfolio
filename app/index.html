@@ -185,6 +185,17 @@ background-color: #ffffff;
 
 
 /* Overlay */
+
+#darkOverlay{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: none;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.6);
+}
 .bg_overlay{
     position: absolute;
     inset: 0;
@@ -286,6 +297,7 @@ canvas{
         <!-- Percentage text -->
         <div id="progressText">0%</div>
     </div>
+    <div id="darkOverlay"></div>
 </body>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -309,7 +321,7 @@ canvas{
             const img = document.createElement("img");
             img.src = `./assets/img/loader/${folder}/${i}.png`;
 
-            console.log('img.src:  ',img.src);
+            //console.log('img.src:  ',img.src);
             
 
             loader.prepend(img);

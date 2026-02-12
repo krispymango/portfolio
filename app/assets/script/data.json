@@ -138,7 +138,9 @@
                 "address": "Accra, Ghana"
             },
             {
-                "title": "Certificate Courses"
+                "title": "online_courses",
+                "institution": "Udemy",
+                "program": "Website Hacking / Penetration Testing"
             }
         ],
         "arabic":{
@@ -450,7 +452,8 @@
 
         }
     },
-    "resume":{
-        "link":"https://portfolio.kriolay.com/resume/Abdul_Razak_Mahama_CV_Resume.pdf"
+    "nav":{
+        "homepage": "https://portfolio.kriolay.com/",
+        "resume": "https://portfolio.kriolay.com/resume/Abdul_Razak_Mahama_Resume.pdf"
     }
 }

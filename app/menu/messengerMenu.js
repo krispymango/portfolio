@@ -57,6 +57,43 @@ class messengerMenu extends Phaser.Scene {
 
 
         //-----------------------------
+        // POP UP MESSAGE
+        //-----------------------------
+        this.popup_box = this.add.nineslice(
+            (config.width >= 350 && config.width <= 500) ? config.width/2 : config.width/2,
+            60,
+            'navigation_menu',
+            0,
+            (config.width >= 350 && config.width <= 500) ? 280 : 350,
+            60,
+            32,32,32,32
+        )
+        .setOrigin(0.5)
+        .setVisible(false)
+        .setDepth(1000)
+        .setTint(0x000000)
+        .setAlpha(1);
+
+        //-----------------------------
+        // POP UP MESSAGE TITLE
+        //-----------------------------
+        this.popup_box_text = this.add.text(
+            (config.width >= 350 && config.width <= 500) ?  this.popup_box.x : this.popup_box.x,
+            this.popup_box.y,
+            ``,
+            {
+                fontFamily: 'fibberish',
+                fontSize: (config.width >= 350 && config.width <= 500) ? '18px' : '25px',
+                fill: '#fff'
+            }
+        )
+        .setOrigin(0.5)
+        .setVisible(false)
+        .setDepth(1001)
+        .setStroke('#44403B', 6);
+
+
+        //-----------------------------
         // TITLE
         //-----------------------------
         const titleOffsetY = -modalHeight / 2 + 40; // 40px padding from top of modal
@@ -90,11 +127,11 @@ class messengerMenu extends Phaser.Scene {
         background: #111;
         color: #fff;
         outline: none;
-        z-index: 10000;
+        z-index: 1000;
     `;
 
     var checkInputAlign = (config.width >= 350 && config.width <= 500) ? 200 : 400;
-    var checkLeftAlign = (config.width >= 350 && config.width <= 500) ? 70 : 200
+    var checkLeftAlign = (config.width >= 350 && config.width <= 500) ? 110 : 200
 
     // Full Name
     this.inputName = document.createElement('input');
@@ -222,10 +259,29 @@ class messengerMenu extends Phaser.Scene {
         // FADE IN
         //-----------------------------
         this.fadeIn();
+
+
+        //-----------------------------
+        // LOAD OVERLAY
+        //-----------------------------
+        // this.load_overlay = this.add.rectangle(
+        //     0, 0,
+        //     this.sys.game.config.width,
+        //     this.sys.game.config.height,
+        //     0x000000
+        // )
+        // .setInteractive()
+        // .setOrigin(0)
+        // .setAlpha(0.6)
+        // .setDepth(9999)
+        // .setVisible(false);
+        
     }
 
 
     submitMessage(){
+            document.getElementById("darkOverlay").style.display = "block";
+
             const controller = new AbortController();
             const timeoutId = setTimeout(() => {
                 controller.abort();
@@ -243,19 +299,47 @@ class messengerMenu extends Phaser.Scene {
             signal: controller.signal // Associate the AbortController's signal with the fetch
           };
 
-        fetch('http://192.168.150.13:81/front_desk/api/v1_api.php', requestOptions)
+        fetch('http://api.kriolay.com:3000/send-message', requestOptions)
         .then((response) => response.json())
         .then((jsonData) => {
             //console.log(jsonData);
             clearTimeout(timeoutId); // Clear the timeout if an error occurs
 
+            document.getElementById("darkOverlay").style.display = "none";
+
             if(jsonData[0].status == 1)
             {
+                
+                
+                this.popup_box.setVisible(true);
+                this.popup_box_text.setText(jsonData[0] ? jsonData[0].message : 'Message Sent!');
+                this.popup_box_text.setVisible(true);
+
+                this.inputEmail.value = "";
+                this.inputName.value = "";
+                this.inputMessage.value = "";
+
+
+                setTimeout(() => {
+                    this.popup_box.setVisible(false);
+                    this.popup_box_text.setText('');
+                    this.popup_box_text.setVisible(false);
+                }, 1000 * 6);
             //checkFirstLogin(jsonData[0]);
             //saveData(jsonData[0]);
             }
             else
             {
+                
+                this.popup_box.setVisible(true);
+                this.popup_box_text.setText(jsonData[0] ? jsonData[0].message : 'Please try again!');
+                this.popup_box_text.setVisible(true);
+
+                setTimeout(() => {
+                    this.popup_box.setVisible(false);
+                    this.popup_box_text.setText('');
+                    this.popup_box_text.setVisible(false);
+                }, 1000 * 6);
             //setErrorMessage(jsonData.message ? jsonData.message : 'Wrong login credentials!');
   
             }
@@ -263,6 +347,17 @@ class messengerMenu extends Phaser.Scene {
         .catch((error) => {
         clearTimeout(timeoutId); // Clear the timeout if an error occurs
         //setErrorMessage('Wrong login credentials!');
+                
+                document.getElementById("darkOverlay").style.display = "none";
+                this.popup_box.setVisible(true);
+                this.popup_box_text.setText(jsonData[0] ? jsonData[0].message : 'Please try again!');
+                this.popup_box_text.setVisible(true);
+
+                setTimeout(() => {
+                    this.popup_box.setVisible(false);
+                    this.popup_box_text.setText('');
+                    this.popup_box_text.setVisible(false);
+                }, 1000 * 6);
         });
     }
 

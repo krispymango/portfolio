@@ -119,7 +119,7 @@ class reusableMenu extends Phaser.Scene {
 // -----------------------------
 // SCROLLABLE DESCRIPTION
 // -----------------------------
-var checkDescWidth = (config.width >= 350 && config.width <= 500) ? 260 : 160;
+var checkDescWidth = (config.width >= 350 && config.width <= 500) ? 110 : 160;
 const descWidth = modalWidth - checkDescWidth;  // leave padding
 const descHeight = modalHeight - 160;
 const centerX = config.width / 2;

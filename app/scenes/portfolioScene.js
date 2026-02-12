@@ -183,7 +183,7 @@ class portfolioScene extends Phaser.Scene{
                 layer.setDepth(1);
                 this.layers.push(layer);
             } else {
-                console.warn(`Layer "${layerName}" not found in map`);
+                //console.warn(`Layer "${layerName}" not found in map`);
             }
         });
         
@@ -375,7 +375,7 @@ class portfolioScene extends Phaser.Scene{
         {
             this.player = Object.values(this.charactersById).find(c => c.type === "player");
 
-            console.log('this.player: ',this.player);
+            //console.log('this.player: ',this.player);
             
 
             if (this.player) this.cameras.main.centerOn(Number(this.player.x), Number(this.player.y));
@@ -1167,7 +1167,7 @@ class portfolioScene extends Phaser.Scene{
             });
             
 
-            console.log("Animated tiles count:", scene.animatedTiles.length);
+            //console.log("Animated tiles count:", scene.animatedTiles.length);
         };
 
 

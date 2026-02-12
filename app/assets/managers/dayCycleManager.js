@@ -52,7 +52,7 @@ class dayCycleManager {
             layer.setTint(0xffffff);
         });
 
-        console.log("Switched to DAY");
+        //console.log("Switched to DAY");
     }
 
     setNight(){
@@ -68,7 +68,7 @@ class dayCycleManager {
             layer.setTint(0x6a7abf); // soft moonlight
         });
 
-        console.log("Switched to NIGHT");
+        //console.log("Switched to NIGHT");
     }
 
     toggleCycle(){

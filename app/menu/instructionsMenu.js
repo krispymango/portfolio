@@ -54,7 +54,7 @@ class instructionsMenu extends Phaser.Scene {
         //-----------------------------
         this.modal_box = this.add.nineslice(
             centerX,
-            centerY + 100,
+            centerY ,
             'navigation_menu',
             0,
             modalWidth,
@@ -80,6 +80,7 @@ class instructionsMenu extends Phaser.Scene {
             32,32,32,32
         )
         .setOrigin(0.5)
+        .setVisible(false)
         .setDepth(1000)
         .setTint(0x000000)
         .setAlpha(0.8)
@@ -95,7 +96,7 @@ class instructionsMenu extends Phaser.Scene {
                 fontFamily: 'fibberish',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '17px' : '19px',
                 fill: '#fff',
-                wordWrap:{ width: this.modal_box.displayWidth - 20 }
+                wordWrap:{ width: this.modal_box.displayWidth - 50 }
             }
         )
         .setOrigin(0.5)
@@ -118,6 +119,7 @@ class instructionsMenu extends Phaser.Scene {
             }
         )
         .setOrigin(0.5)
+        .setVisible(false)
         .setDepth(1001)
         .setStroke('#44403B', 6);
 
@@ -234,7 +236,7 @@ class instructionsMenu extends Phaser.Scene {
             this.modal_box_desc.setText(
                 this.messages[this.currentMessageIndex]
             );
-            console.log('this.currentMessageIndex: ',this.currentMessageIndex);
+            //console.log('this.currentMessageIndex: ',this.currentMessageIndex);
             
         }
         else
