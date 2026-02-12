@@ -98,19 +98,19 @@ class movementManager {
         switch (character.actionState.direction) {
             case 'left':
                 character.setFlipX(true);
-                character.setFrame(8);
+                character.type == 'player' ? character.setFrame(8) : character.setFrame(6);
                 break;
             case 'right':
                 character.setFlipX(false);
-                character.setFrame(8);
+                character.type == 'player' ? character.setFrame(8) : character.setFrame(6);
                 break;
             case 'up':
                 character.setFlipX(false);
-                character.setFrame(16);
+                character.type == 'player' ? character.setFrame(16) : character.setFrame(6);
                 break;
             default: // down
                 character.setFlipX(false);
-                character.setFrame(0);
+                character.type == 'player' ? character.setFrame(0) : character.setFrame(6);
                 break;
         }
     }
