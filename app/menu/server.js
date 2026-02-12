@@ -23,8 +23,8 @@ app.post('/send-message', upload.none(), async (req, res) => {
       port: 587,
       secure: false,
       auth: {
-        user: "razakmahama.rm@gmail.com",
-        pass: "smoiytjazssgghlr"
+        user: "",
+        pass: ""
       }
     });
 
