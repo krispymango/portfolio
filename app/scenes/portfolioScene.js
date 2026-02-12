@@ -833,7 +833,7 @@ class portfolioScene extends Phaser.Scene{
         });
 
         this.my_resume.on('pointerdown', () => {
-            window.open(this.cache.json.get('config_data').resume.link, "_blank");
+            window.open(this.cache.json.get('config_data').nav.resume, "_blank");
         });
 
 
@@ -854,7 +854,7 @@ class portfolioScene extends Phaser.Scene{
 
 
         this.my_home.on('pointerdown', () => {
-            window.location.href = "http://localhost:3000/";
+            window.location.href = this.cache.json.get('config_data').nav.homepage;
         });
 
 
