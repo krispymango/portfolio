@@ -93,24 +93,25 @@
             "first_time":[
                 "Hello!",
                 "Welcome, to my Portfolio!",
-                "Drag around the screen to explore my portfolio!",
-                "Click on any of the buildings to know about me."
+                "Drag across the screen to navigate my portfolio.",
+                "Click on any of the buildings to discover my story."
             ],
             "default":[
                 "Welcome Back!",
-                "Drag around the screen to explore my portfolio!",
-                "Click on any of the buildings to know about me."
+                "Drag across the screen to navigate my portfolio.",
+                "Click on any of the buildings to discover my story."
             ]
         },
         "desktop":{
             "first_time":[
                 "Hello!",
-                "Welcome, to my Portfolio!",
-                "Click on any of the buildings to know about me."
+                "Drag across the screen to navigate my portfolio.",
+                "Click on any of the buildings to discover my story."
             ],
             "default":[
                 "Welcome Back!",
-                "Click on any of the buildings to know about me."
+                "Drag across the screen to navigate my portfolio.",
+                "Click on any of the buildings to discover my story."
             ]
         }
     },
