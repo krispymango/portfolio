@@ -371,7 +371,7 @@ class portfolioScene extends Phaser.Scene{
         });
         
 
-        if (config.width >= 350 && config.width <= 500) 
+        if (config.width >= 350 && config.width <= 850) 
         {
             this.player = Object.values(this.charactersById).find(c => c.type === "player");
 
@@ -392,7 +392,7 @@ class portfolioScene extends Phaser.Scene{
         // sprite.setDepth(9);
         // sprite.setOrigin(0.5);
 
-        if (config.width >= 350 && config.width <= 500) 
+        if (config.width >= 350 && config.width <= 850) 
         {
         const cam = this.cameras.main;
 

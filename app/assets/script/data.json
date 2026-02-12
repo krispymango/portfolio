@@ -105,12 +105,11 @@
         "desktop":{
             "first_time":[
                 "Hello!",
-                "Drag across the screen to navigate my portfolio.",
+                "Welcome, to my Portfolio!",
                 "Click on any of the buildings to discover my story."
             ],
             "default":[
                 "Welcome Back!",
-                "Drag across the screen to navigate my portfolio.",
                 "Click on any of the buildings to discover my story."
             ]
         }
