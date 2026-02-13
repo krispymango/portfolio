@@ -188,7 +188,7 @@ class portfolioScene extends Phaser.Scene{
         });
         
 
-        const mapScale = 1.6;
+        const mapScale = (config.width >= 501 && config.width <= 1025) ?  2.5 : (config.width >= 350 && config.width <= 500) ?  1.6 : 1.6;
 
         // Scale all layers
         this.layers.forEach(layer => layer.setScale(mapScale));
@@ -371,7 +371,7 @@ class portfolioScene extends Phaser.Scene{
         });
         
 
-        if (config.width >= 350 && config.width <= 850) 
+        if (config.width >= 350 && config.width <= 1025) 
         {
             this.player = Object.values(this.charactersById).find(c => c.type === "player");
 
@@ -392,7 +392,7 @@ class portfolioScene extends Phaser.Scene{
         // sprite.setDepth(9);
         // sprite.setOrigin(0.5);
 
-        if (config.width >= 350 && config.width <= 850) 
+        if (config.width >= 350 && config.width <= 1025) 
         {
         const cam = this.cameras.main;
 
@@ -578,7 +578,7 @@ class portfolioScene extends Phaser.Scene{
         .setAlpha(0.6);
 
         var socials_section = this.add.nineslice(
-            (this.player) ? config.width / 2 + 90 : config.width / 2 + 200 + 270 + 50 , 
+            (this.player) ? config.width - 100 : config.width / 2 + 200 + 270 + 50 , 
             (this.player) ? config.height - 40 : 50, 
             'navigation_menu', 0,
             (this.player) ? 170 : 270, 
@@ -590,7 +590,7 @@ class portfolioScene extends Phaser.Scene{
         .setAlpha(0.6);
 
         var resume_section = this.add.nineslice(
-            (this.player) ? config.width / 2 - 130 : config.width / 2 - 200 - 270 - 50 , 
+            (this.player) ? 60 : config.width / 2 - 200 - 270 - 50 , 
             (this.player) ? config.height - 40 : 50, 
             'navigation_menu', 0, 
             (this.player) ? 90 : 270, 

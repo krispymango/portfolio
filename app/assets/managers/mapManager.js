@@ -91,7 +91,7 @@ class mapManager {
             };
         });
 
-        console.log('poiData: ',poiData);
+        //console.log('poiData: ',poiData);
         
         return poiData;
     }
@@ -154,7 +154,7 @@ class mapManager {
             return JSON.parse(fixed);
 
         } catch (err) {
-            console.warn("❌ Invalid items format:", input, err);
+            //console.warn("❌ Invalid items format:", input, err);
             return null;
         }
     }

@@ -67,7 +67,7 @@ class reusableMenu extends Phaser.Scene {
             modalWidth = 350;
             modalHeight = 600;
         }
-        else if (config.width >= 350 && config.width <= 850)
+        else if (config.width >= 350 && config.width <= 1025)
         {
             modalWidth = 600;
             modalHeight = 600;
@@ -79,7 +79,7 @@ class reusableMenu extends Phaser.Scene {
                 modalWidth = 350;   // smaller width
                 modalHeight = 600;  // smaller height
             }
-            else if (config.width >= 350 && config.width <= 850)
+            else if (config.width >= 350 && config.width <= 1025)
             {
                 modalWidth = 600;
                 modalHeight = 600;
@@ -129,7 +129,7 @@ class reusableMenu extends Phaser.Scene {
 // -----------------------------
 // SCROLLABLE DESCRIPTION
 // -----------------------------
-var checkDescWidth = (config.width >= 350 && config.width <= 500) ? 110 :  (config.width >= 350 && config.width <= 850) ? 110 : 160;
+var checkDescWidth = (config.width >= 350 && config.width <= 500) ? 110 :  (config.width >= 350 && config.width <= 1025) ? 110 : 160;
 const descWidth = modalWidth - checkDescWidth;  // leave padding
 const descHeight = modalHeight - 160;
 const centerX = config.width / 2;
@@ -294,8 +294,8 @@ else if (data.data.imp === 'core_competence') {
 
         let currentY = -descHeight / 2; // start from top
         const itemSpacing = 100;        // space between items
-        const spriteSize = (config.width >= 350 && config.width <= 500) ? 50 : (config.width >= 350 && config.width <= 850) ? 60 : 70;          // max sprite size
-        const textOffsetX = (config.width >= 350 && config.width <= 500) ? 80 : (config.width >= 350 && config.width <= 850) ? 90 : 120;        // label text X offset
+        const spriteSize = (config.width >= 350 && config.width <= 500) ? 50 : (config.width >= 350 && config.width <= 1025) ? 60 : 70;          // max sprite size
+        const textOffsetX = (config.width >= 350 && config.width <= 500) ? 80 : (config.width >= 350 && config.width <= 1025) ? 90 : 120;        // label text X offset
         const itemWidth = descWidth;    // width of nineslice
         const itemHeight = 80;          // height of each item background
 
