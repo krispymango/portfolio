@@ -299,7 +299,7 @@ class messengerMenu extends Phaser.Scene {
             signal: controller.signal // Associate the AbortController's signal with the fetch
           };
 
-        fetch('http://api.kriolay.com:3000/send-message', requestOptions)
+        fetch('https://api.kriolay.com/send-message.php', requestOptions)
         .then((response) => response.json())
         .then((jsonData) => {
             //console.log(jsonData);
@@ -350,7 +350,7 @@ class messengerMenu extends Phaser.Scene {
                 
                 document.getElementById("darkOverlay").style.display = "none";
                 this.popup_box.setVisible(true);
-                this.popup_box_text.setText(jsonData[0] ? jsonData[0].message : 'Please try again!');
+                this.popup_box_text.setText('Please try again!');
                 this.popup_box_text.setVisible(true);
 
                 setTimeout(() => {
