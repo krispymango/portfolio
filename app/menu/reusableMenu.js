@@ -161,7 +161,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 fontFamily:'fibberish',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :  '26px',
                 fill:'#fff',
-                fontStyle:'bold',
+                
                 wordWrap:{ width: itemWidth - 10 }
             }).setOrigin(0,0).setStroke('#44403B', 5);
             texts.push(t);
@@ -186,7 +186,7 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 fontFamily:'fibberish',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '18px' :'22px',
                 fill:'#fff',
-                fontStyle:'bold',
+                
                 wordWrap:{ width: itemWidth - 10 }
             }).setOrigin(0,0).setStroke('#44403B', 5);
             texts.push(titleText);
