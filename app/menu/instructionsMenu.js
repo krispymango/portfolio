@@ -93,7 +93,7 @@ class instructionsMenu extends Phaser.Scene {
             this.modal_box.y,
             this.messages[this.currentMessageIndex],
             {
-                fontFamily: 'fibberish',
+                fontFamily: 'Kenney_Future_Narrow',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '17px' : '19px',
                 fill: '#fff',
                 wordWrap:{ width: this.modal_box.displayWidth - 50 }
@@ -113,7 +113,7 @@ class instructionsMenu extends Phaser.Scene {
             this.modal_box.y - 110,
             `Abdul - Razak Mahama`,
             {
-                fontFamily: 'fibberish',
+                fontFamily: 'Kenney_Future_Narrow',
                 fontSize: (config.width >= 350 && config.width <= 500) ? '18px' : '25px',
                 fill: '#fff'
             }
@@ -149,7 +149,7 @@ class instructionsMenu extends Phaser.Scene {
             this.modal_box.y + 100,
             `Previous`,
             {
-                fontFamily: 'fibberish',
+                fontFamily: 'Kenney_Future_Narrow',
                 fontSize: '22px',
                 fill: '#fff'
             }
@@ -199,7 +199,7 @@ class instructionsMenu extends Phaser.Scene {
             this.modal_box.y + 100,
             `Next`,
             {
-                fontFamily: 'fibberish',
+                fontFamily: 'Kenney_Future_Narrow',
                 fontSize: '22px',
                 fill: '#fff'
             }
