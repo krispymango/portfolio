@@ -1028,6 +1028,42 @@ class portfolioScene extends Phaser.Scene{
 
         createAnimationsAnimals(spriteKey) {
 
+            if (spriteKey == 'pidgeon') {
+
+            // RIGHT
+            this.anims.create({
+                key: `${spriteKey}_walk_right`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 12, end: 15 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // UP
+            this.anims.create({
+                key: `${spriteKey}_walk_up`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 12, end: 15 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // DOWN
+            this.anims.create({
+                key: `${spriteKey}_walk_down`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 12, end: 15 }),
+                frameRate: 8,
+                repeat: -1
+            });
+
+            // IDLE (optional but recommended)
+            this.anims.create({
+                key: `${spriteKey}_idle_down`,
+                frames: this.anims.generateFrameNumbers(spriteKey, { start: 0, end: 3 }),
+                frameRate: 8,
+                repeat: -1
+            });
+            }
+            else
+            {
             // RIGHT
             this.anims.create({
                 key: `${spriteKey}_walk_right`,
@@ -1059,6 +1095,7 @@ class portfolioScene extends Phaser.Scene{
                 frameRate: 1
             });
         }
+            }
 
     drawCorners(graphics, zone) {
 

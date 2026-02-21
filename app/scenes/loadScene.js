@@ -101,6 +101,12 @@ class loadScene extends Phaser.Scene{
             frameHeight: 16
         });
 
+        this.load.spritesheet("pidgeon", "./assets/img/characters/pidgeon.png", {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+
+
         //Panels
         this.load.image('navigation_menu', './assets/img/ui/transparent_border/panel-transparent-border-010.png');
 

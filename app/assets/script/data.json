@@ -2,7 +2,7 @@
     "characters":[
         {
             "id": 2,
-            "name": "John",
+            "name": "Chicken Two",
             "type": "npc",
             "gender": "M",
             "spriteKey": "chicken",
@@ -24,7 +24,7 @@
         },
         {
             "id": 3,
-            "name": "John",
+            "name": "Chicken One",
             "type": "npc",
             "gender": "M",
             "spriteKey": "chicken",
@@ -46,7 +46,7 @@
         },
         {
             "id": 4,
-            "name": "John",
+            "name": "Baby Chick",
             "type": "npc",
             "gender": "M",
             "spriteKey": "chick",
