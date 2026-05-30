@@ -398,6 +398,16 @@ else {
                     const t = this.add.text(padding, currentTextY, item.institution, { fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', fill:'#fff', wordWrap:{ width: itemWidth - 10 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
                 }
+                if (item.from_date) {
+                    const t = this.add.text(padding, currentTextY, `( ${item.from_date} - ${item.to_date} )`, {
+                        fontFamily:'fibberish',
+                        fontSize:'20px',
+                        fill:'#fff',
+                        wordWrap:{ width: itemWidth - 10 }
+                    }).setOrigin(0,0).setStroke('#44403B', 4);
+                    texts.push(t);
+                    currentTextY += t.height + 2;
+                }
                 if (item.description) {
                     const t = this.add.text(padding, currentTextY, item.description, { fontFamily:'fibberish', fontSize: (config.width >= 350 && config.width <= 500) ? '16px' : '20px', fill:'#fff', wordWrap:{ width: itemWidth - padding*2 } }).setOrigin(0,0).setStroke('#44403B', 5);
                     texts.push(t); currentTextY += t.height + 4;
