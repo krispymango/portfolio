@@ -202,6 +202,20 @@ if (data.data.imp === 'profile_summary' && Array.isArray(descData)) {
                 texts.push(t);
                 currentTextY += t.height + 2;
             }
+
+            if (item.from_date) {
+                const t = this.add.text(padding, currentTextY, `From Date: ${item.from_date} - ${item.to_date}`, {
+                    fontFamily:'fibberish',
+                    fontSize:'20px',
+                    fill:'#fff',
+                    wordWrap:{ width: itemWidth - 10 }
+                }).setOrigin(0,0).setStroke('#44403B', 4);
+                texts.push(t);
+                currentTextY += t.height + 2;
+            }
+
+
+
             if (item.program) {
                 const t = this.add.text(padding, currentTextY, `Program: ${item.program}`, {
                     fontFamily:'fibberish',
